@@ -1,0 +1,76 @@
+@mixin circle($radius, $thickness, $color, $is_solid: false) {
+  @if ($is_solid) {
+    background-color: $color;
+  } @else {
+    background-color: transparent;
+  }
+
+  height: $radius;
+  width: $radius;
+  border: $thickness solid $color;
+  border-radius: 100%;
+}
+
+@mixin fonts($font-weight, $font-size, $line-height, $color) {
+  font-weight: $font-weight;
+  font-size: $font-size;
+  line-height: $line-height;
+  color: $color;
+}
+
+@mixin display-flex($justify-content: center, $align-items: center) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin center_absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin font-face($font-name, $path, $weight: normal, $style: normal) {
+  @font-face {
+    font-family: quote($font-name);
+    src: url($path + ".ttf") format("truetype");
+    font-weight: $weight;
+    font-style: $style;
+  }
+}
+
+@mixin fade($type) {
+  @if $type== "hide" {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 1s, opacity 1s;
+  } @else if $type== "show" {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 1s, opacity 1s;
+  }
+}
+
+@mixin skew-background-transition($initial, $hover, $inverted: false) {
+  background-size: 200% 100%;
+  background: linear-gradient(
+                  90deg,
+                  $hover 0%,
+                  $hover 50%,
+                  $initial 50%,
+                  $initial 100%
+  )
+  no-repeat right bottom;
+  @if $inverted {
+    background-position: left bottom;
+  }
+  transition: background-position 0.25s ease-out;
+
+  &:hover {
+    background-position: left bottom;
+    @if $inverted {
+      background-position: right bottom;
+    }
+  }
+}

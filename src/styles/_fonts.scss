@@ -1,0 +1,16 @@
+@import "mixins";
+
+//@include font-face(SFProDisplay, "../assets/fonts/Roboto-Thin", 100);
+//@include font-face(SFProDisplay, "../assets/fonts/Roboto-Light", 300);
+@include font-face(SFProDisplay, "../assets/fonts/SFPRODISPLAYREGULAR", 400);
+@include font-face(SFProDisplay, "../assets/fonts/SFPRODISPLAYMEDIUM", 500);
+@include font-face(SFProDisplay, "../assets/fonts/SFPRODISPLAYBOLD", 700);
+//@include font-face(Roboto, "../assets/fonts/Roboto-Black", 900);
+
+@include font-face(SFProDisplay, "../assets/fonts/SFPRODISPLAYULTRALIGHTITALIC", 100, italic);
+@include font-face(SFProDisplay, "../assets/fonts/SFPRODISPLAYTHINITALIC", 200, italic);
+@include font-face(SFProDisplay, "../assets/fonts/SFPRODISPLAYLIGHTITALIC", 300, italic);
+//@include font-face(Roboto, "../assets/fonts/Roboto-Italic", 400, italic);
+//@include font-face(Roboto, "../assets/fonts/Roboto-MediumItalic", 500, italic);
+@include font-face(SFProDisplay, "../assets/fonts/SFPRODISPLAYSEMIBOLDITALIC", 700, italic);
+@include font-face(SFProDisplay, "../assets/fonts/SFPRODISPLAYBLACKITALIC", 900, italic);

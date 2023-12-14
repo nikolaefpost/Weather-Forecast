@@ -1,0 +1,40 @@
+@import "../../styles/mixins";
+@import "../../styles/colors";
+
+
+.daily_basic{
+  position: relative;
+  z-index: 2;
+  @include display-flex(flex-start);
+  flex-direction: column;
+  gap: 12px;
+
+  & h3{
+    @include fonts(400, 34px, 41px, $label-dark-primary);
+  }
+  & h1{
+    @include fonts(100, 96px, 70px, $label-dark-primary);
+    letter-spacing: 0.374px;
+    font-feature-settings: 'clig' off, 'liga' off;
+  }
+
+  .descriptions{
+
+    & p{
+      letter-spacing: 0.38px;
+    }
+
+    & p:first-child{
+      @include fonts(600, 20px, 24px, $label-dark-secondary);
+    }
+
+    & p:last-child{
+      font-feature-settings: 'clig' off, 'liga' off;
+      @include display-flex(space-between);
+
+      & span{
+        @include fonts(600, 20px, 24px, $label-dark-primary);
+      }
+    }
+  }
+}
