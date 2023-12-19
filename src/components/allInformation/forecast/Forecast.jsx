@@ -1,21 +1,24 @@
 import React from 'react';
+import ForecastItem from "./ForecastItem.jsx";
+import PropTypes from "prop-types";
 
 import styles from "../allInformation.module.scss"
-import ForecastItem from "./ForecastItem.jsx";
 
 
-const forecast = [1, 2, 3, 4, 5, 6, 7]
-
-const Forecast = () => {
+const Forecast = ({forecastData, isWeekly}) => {
     return (
         <div className={styles.forecast}>
             <div className={styles.shift_block}>
-                {forecast.map((item, index)=>(
-                    <ForecastItem key={item} item={item} index={index}/>
+                {forecastData.map((item, index)=>(
+                    <ForecastItem key={item.id} {...item} index={index} isWeekly={isWeekly}/>
                 ))}
             </div>
         </div>
     );
 };
 
+Forecast.propTypes = {
+    forecastData: PropTypes.array.isRequired,
+    isWeekly: PropTypes.bool.isRequired,
+};
 export default Forecast;

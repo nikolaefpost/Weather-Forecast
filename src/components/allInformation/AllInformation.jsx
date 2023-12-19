@@ -1,15 +1,13 @@
 import React, {useState} from 'react';
-import cn from "classnames";
-
-
-import styles from "./allInformation.module.scss"
 import {rectangle, ellipse1, ellipse2, shape, ellipse3} from "../../assets/svgElement";
 import SegmentedControl from "./SegmentedControl.jsx";
 import Forecast from "./forecast/Forecast.jsx";
 import TabBar from "./tabBar/TabBar.jsx";
+import PropTypes from "prop-types";
 
-const AllInformation = () => {
-    const [isWeekly, setIsWeekly]= useState(true)
+import styles from "./allInformation.module.scss"
+
+const AllInformation = ({forecastData, isWeekly, setIsWeekly}) => {
 
     const setMode = () => {
         setIsWeekly(pre=>!pre)
@@ -25,10 +23,16 @@ const AllInformation = () => {
             <div className={styles.ellipse4}/>
 
             <SegmentedControl isWeekly={isWeekly} setMode={setMode}/>
-            <Forecast/>
+            <Forecast forecastData={forecastData} isWeekly={isWeekly} />
             <TabBar/>
         </div>
     );
+};
+
+AllInformation.propTypes = {
+    forecastData: PropTypes.array.isRequired,
+    isWeekly: PropTypes.bool.isRequired,
+    setIsWeekly: PropTypes.func.isRequired,
 };
 
 export default AllInformation;

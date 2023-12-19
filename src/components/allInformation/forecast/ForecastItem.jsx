@@ -1,22 +1,50 @@
 import React from 'react';
 import cn from "classnames";
-import styles from "../allInformation.module.scss";
-import {moon_cloud_mid_rain} from "../../../assets/image/cloud";
+import PropTypes from "prop-types";
+import {cloudsData} from "../../../helpers/index.js";
 
-const ForecastItem = ({item, index}) => {
+import styles from "../allInformation.module.scss";
+
+
+const ForecastItem = ({id, hour, day, date, month, cloudIcon, clouds, temp, index, isWeekly}) => {
+
     return (
         <div
-            key={item}
-            className={cn(styles.item, {[styles.item_now]: index === 1})}
+            key={id}
+            className={
+            cn(styles.item, {[styles.item_now]: index === (isWeekly? 0: 1)})}
         >
-            <span className={styles.time}>0{item} AM</span>
-            <div className={styles.weather_icon}>
-                <img alt="cloud" src={moon_cloud_mid_rain} className={styles.icon}/>
-                <span className={styles.label}>30%</span>
+            <div className={styles.date}>
+                {!isWeekly ? <span className={styles.time}>{hour}:00 </span> :
+                    <span className={styles.time}>{day} </span>
+                }
+                {/*<span className={styles.time}>{day}.{month} </span>*/}
             </div>
-            <span className={styles.temperature}>{item}°</span>
+
+            <div className={styles.weather_icon}>
+                <img
+                    alt="cloud"
+                    src={cloudsData[cloudIcon]}
+                    className={styles.icon}
+                />
+                <span className={styles.label}>{clouds}%</span>
+            </div>
+            <span className={styles.temperature}>{temp}°</span>
         </div>
     );
+};
+
+ForecastItem.propTypes = {
+    id: PropTypes.number.isRequired,
+    hour: PropTypes.number.isRequired,
+    day: PropTypes.string,
+    date: PropTypes.number,
+    month: PropTypes.string,
+    cloudIcon: PropTypes.string.isRequired,
+    clouds: PropTypes.number.isRequired,
+    temp: PropTypes.number.isRequired,
+    index: PropTypes.number.isRequired,
+    isWeekly: PropTypes.bool.isRequired,
 };
 
 export default ForecastItem;

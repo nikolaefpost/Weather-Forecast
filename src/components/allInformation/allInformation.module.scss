@@ -158,26 +158,34 @@
       }
 
       & .item{
-        @include display-flex;
+        @include display-flex(space-between);
         flex-shrink: 0;
         width: 60px;
         height: 100%;
         padding: 16px 8px;
         flex-direction: column;
-        gap: 16px;
+        //gap: 12px;
         border-radius: 30px;
         border: 1px solid rgba(255, 255, 255, 0.20);
         background: rgba(72, 49, 157, 0.20);
         box-shadow: 5px 4px 10px 0px rgba(0, 0, 0, 0.25), 1px 1px 0px 0px rgba(255, 255, 255, 0.25) inset;
 
-        & .time{
-          @include fonts(600, 15px, 20px, $label-dark-primary);
-          letter-spacing: -0.5px;
+        & .date{
+          @include display-flex;
+          flex-direction: column;
+          gap: 2px;
+
+          & .time{
+            @include fonts(600, 15px, 20px, $label-dark-primary);
+            letter-spacing: -0.5px;
+          }
         }
+
 
         & .weather_icon{
           @include display-flex;
           flex-direction: column;
+          gap: 4px;
 
           & .icon{
             width: 32px;
