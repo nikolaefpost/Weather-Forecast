@@ -1,83 +1,48 @@
 // import {useState} from 'react'
 import styles from './App.module.scss'
-import {DailyBasic} from "./components/index.js";
-import AllInformation from "./components/allInformation/AllInformation.jsx";
+import {DailyBasic, DailyBasicShort, AllInformation} from "./components";
 import useApiRequests from "./hooks/useApiRequests.js";
-import {useEffect, useState} from "react";
-import {toCelsius, weekData} from "./helpers";
+import { useState} from "react";
+import useForecastData from "./hooks/useForecastData.js";
 
-const monthData =["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
+
 
 
 function App() {
     const promt = "Odesa";
     const [isWeekly, setIsWeekly]= useState(false)
-    const [dailyData, setDailyData] = useState({
-        locationString: "введите город",
-        temp: 273,
-        description: "--",
-        minTemp: 273,
-        maxTemp: 273
-    })
-    const [forecastData, setForecastData] = useState([])
+    const [blockHeight, setBlockHeight] = useState(325);
+    const screenHeight = window.screen.height;
 
+    const handleTouchMove = (e) => {
+        const newHeight = screenHeight - e.touches[0].clientY; // Adjust sensitivity as needed
+        setBlockHeight(Math.max(325, newHeight)); // Ensure a minimum height
+    };
 
-    const {error, promptData, locationData, weatherData} =
-        useApiRequests(promt);
-
-    useEffect(() => {
-        if (!weatherData?.daily) return;
-        setDailyData({
-            locationString: promptData?.locationString,
-            temp: weatherData?.current?.temp,
-            description: weatherData?.current?.weather[0].description,
-            minTemp: weatherData?.daily[0].temp.min,
-            maxTemp: weatherData?.daily[0].temp.max,
-        })
-
-        const limitWeatherData = weatherData.hourly.slice(0, 24);
-
-        const hourly = limitWeatherData.map(elem => {
-            const date = new Date(elem.dt * 1000)
-            return {
-                id: elem.dt,
-                hour: date.getHours(),
-                day: weekData[date.getDay()],
-                date: date.getDate(),
-                month: monthData[date.getMonth()],
-                cloudIcon: elem.weather[0].icon,
-                clouds: elem.clouds,
-                temp: toCelsius(elem.temp)
-            }
-        })
-
-        const weekly = weatherData.daily.map(elem => {
-                    const date = new Date(elem.dt * 1000)
-                    return {
-                        id: elem.dt,
-                        hour: date.getHours(),
-                        day: weekData[date.getDay()],
-                        date: date.getDate(),
-                        month: monthData[date.getMonth()],
-                        cloudIcon: elem.weather[0].icon,
-                        clouds: elem.clouds,
-                        temp: toCelsius(elem.temp.day)
-                    }
-                })
-        console.log(weekly)
-        setForecastData(isWeekly? weekly: hourly);
-    }, [weatherData, promptData, isWeekly]);
+    const {error, promptData, locationData, weatherData} = useApiRequests(promt);
     console.log(weatherData)
+
+    const [dailyData, forecastData, weatherDetails] = useForecastData(weatherData, promptData, isWeekly)
 
     return (
         <div
             className={styles.container}
         >
-            <div className={styles.content}>
+            <div
+                className={styles.content}
+                style={{paddingTop: (blockHeight > 350)?"52px" : "98px"}}
+            >
                 <div className={styles.house}/>
                 <div className={styles.shadow}/>
-                <DailyBasic {...dailyData}/>
-                <AllInformation forecastData={forecastData} isWeekly={isWeekly} setIsWeekly={setIsWeekly} />
+                {(blockHeight > 350)? <DailyBasicShort {...dailyData}/> : <DailyBasic {...dailyData}/>}
+                <AllInformation
+                    forecastData={forecastData}
+                    weatherDetails={weatherDetails}
+                    isWeekly={isWeekly}
+                    setIsWeekly={setIsWeekly}
+                    height={blockHeight}
+                    handleTouchMove={handleTouchMove}
+                />
             </div>
 
         </div>

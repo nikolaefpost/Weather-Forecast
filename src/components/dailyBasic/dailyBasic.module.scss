@@ -37,4 +37,24 @@
       }
     }
   }
+
+  & .all_descriptions{
+    @include display-flex;
+
+    & p{
+      letter-spacing: 0.38px;
+      @include fonts(600, 20px, 20px, $label-dark-secondary);
+      padding: 0 6px;
+    }
+
+    & p:first-child{
+      border-right: 3px solid $label-dark-secondary;
+    }
+  }
+
+
+}
+
+.short{
+  gap: 0;
 }

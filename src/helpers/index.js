@@ -36,5 +36,8 @@ const cloudsData = {
 }
 
 const weekData = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+const monthData =["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
 
-export {toCelsius, firstLetterCapitalized, cloudsData, weekData}
+const uvIndex = ["Low", "Low", "Low", "Moderate", "Moderate", "Moderate", "High", "High", "Very high", "Very high", "Very high", "Extreme"];
+
+export {toCelsius, firstLetterCapitalized, cloudsData, weekData, monthData, uvIndex}

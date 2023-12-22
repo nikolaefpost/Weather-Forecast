@@ -268,4 +268,19 @@
       }
     }
   }
+
+  & .weather_details{
+    width: 100%;
+     padding: 10px 24px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 14px;
+
+    & .item{
+      width: 100%;
+      height: 164px;
+      border-radius: 22px;
+      border: 1px solid #FFF;
+    }
+  }
 }

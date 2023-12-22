@@ -3,9 +3,12 @@ import styles from "./allInformation.module.scss";
 import {shape} from "../../assets/svgElement/index.js";
 import cn from "classnames";
 
-const SegmentedControl = ({isWeekly, setMode}) => {
+const SegmentedControl = ({isWeekly, setMode, handleMouseDown}) => {
     return (
-        <div className={styles.segmented_control}>
+        <div
+            className={styles.segmented_control}
+            // onMouseDown={handleMouseDown}
+        >
             <img alt="shape" src={shape} className={styles.shape}/>
             <div className={styles.separator_up}/>
             <button onClick={setMode}>Hourly Forecast</button>
