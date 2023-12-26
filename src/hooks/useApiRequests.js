@@ -3,14 +3,13 @@ import promptToLocation from "../api/promtToLocation.js";
 import locationToCoordinates from "../api/locationToCoordinates.js";
 import getWeatherData from "../api/getWeatherData.js";
 import PropTypes from "prop-types";
-
 const useApiRequests = (prompt) => {
     const [error, setError] = useState(null);
     const [promptData, setPromptData] = useState({});
     const [locationData, setLocationData] = useState([]);
     const [weatherData, setWeatherData] = useState({});
     // const [weatherDescription, setWeatherDescription] = useState(null);
-
+    console.log("API");
     // Fetch location and weather data from API.
     useEffect(() => {
         const fetchData = async () => {

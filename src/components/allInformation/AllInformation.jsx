@@ -1,15 +1,16 @@
 
-import {rectangle, ellipse1, ellipse2, shape, ellipse3} from "../../assets/svgElement";
+import {rectangle, ellipse1, ellipse2, ellipse3} from "../../assets/svgElement";
 import SegmentedControl from "./SegmentedControl.jsx";
 import Forecast from "./forecast/Forecast.jsx";
 import TabBar from "./tabBar/TabBar.jsx";
 import PropTypes from "prop-types";
 
 import styles from "./allInformation.module.scss"
-import Uv from "./weatherDetails/Uv.jsx";
+import {Sunrise, Uvi, Wind} from "./weatherDetails";
+
 
 const AllInformation = ({forecastData, isWeekly, setIsWeekly, height, handleTouchMove, weatherDetails}) => {
-const {uv} = weatherDetails
+const {uv, sunrise, sunset, windDeg, windSpeed} = weatherDetails
 
     const setMode = () => {
         setIsWeekly(pre=>!pre)
@@ -22,7 +23,7 @@ const {uv} = weatherDetails
             onTouchMove={handleTouchMove}
         >
             <div className={styles.top_ellipse1}/>
-            <img className={styles.border} alt='border' src={rectangle}/>
+            {(height < 350) && <img className={styles.border} alt='border' src={rectangle}/>}
             <img alt="ellipse" src={ellipse1} className={styles.ellipse1}/>
             <img alt="ellipse" src={ellipse2} className={styles.top_ellipse2}/>
             <img alt="ellipse" src={ellipse3} className={styles.ellipse3}/>
@@ -32,10 +33,9 @@ const {uv} = weatherDetails
             <Forecast forecastData={forecastData} isWeekly={isWeekly} />
             {(height < 350) && <TabBar/>}
             {(height > 350) && <div className={styles.weather_details}>
-                <Uv uv={uv}/>
-                <div className={styles.item}>weather_d</div>
-                <div className={styles.item}>weather_</div>
-                <div className={styles.item}>weather_d</div>
+                <Uvi uv={uv}/>
+                <Sunrise  sunrise={sunrise} sunset={sunset}/>
+                <Wind windDeg={windDeg} windSpeed={windSpeed} />
             </div>}
         </div>
     );
@@ -47,6 +47,7 @@ AllInformation.propTypes = {
     setIsWeekly: PropTypes.func.isRequired,
     handleTouchMove: PropTypes.func.isRequired,
     height: PropTypes.number.isRequired,
+    weatherDetails: PropTypes.object.isRequired,
 };
 
 export default AllInformation;

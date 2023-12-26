@@ -1,6 +1,10 @@
 import PropTypes from "prop-types";
 
 const promptToLocation = (prompt) => {
+
+    const promptData = JSON.parse(localStorage.getItem(prompt));
+    if (promptData?.locationString)  return promptData;
+
     const url = "https://api.openai.com/v1/chat/completions";
 
     const data = {
@@ -88,6 +92,8 @@ const promptToLocation = (prompt) => {
                 country: promptRes.country,
                 USstate: promptRes.USstate
             }
+
+            localStorage.setItem(prompt, JSON.stringify(promptData));
 
             return promptData;
         })

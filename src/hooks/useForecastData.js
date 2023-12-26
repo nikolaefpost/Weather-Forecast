@@ -25,7 +25,14 @@ const useForecastData = (weatherData, promptData, isWeekly) => {
             maxTemp: weatherData?.daily[0].temp.max,
         })
 
-        setWeatherDetails({uv: weatherData?.current?.uvi})
+        setWeatherDetails({
+            uv: weatherData?.current?.uvi,
+            sunrise: weatherData?.current?.sunrise,
+            sunset: weatherData?.current?.sunset,
+            windDeg: weatherData?.current?.wind_deg,
+            windSpeed: weatherData?.current?.wind_speed,
+
+        })
 
         const limitWeatherData = weatherData.hourly.slice(0, 24);
 
