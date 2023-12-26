@@ -31,7 +31,13 @@ const useForecastData = (weatherData, promptData, isWeekly) => {
             sunset: weatherData?.current?.sunset,
             windDeg: weatherData?.current?.wind_deg,
             windSpeed: weatherData?.current?.wind_speed,
-
+            rain: weatherData?.current?.rain?.lh,
+            snow: weatherData?.current?.snow?.lh,
+            feelsLike: weatherData?.current?.feels_like,
+            humidity: weatherData?.current?.humidity,
+            dewPoint: weatherData?.current?.dew_point,
+            visibility: weatherData?.current?.visibility,
+            pressure: weatherData?.current?.pressure,
         })
 
         const limitWeatherData = weatherData.hourly.slice(0, 24);

@@ -116,6 +116,65 @@
     }
   }
 
+  & .rain_snow{
+    height: 112px;
+    @include display-flex;
+    gap: 4px;
+    flex-direction: column;
+
+    & .value{
+      @include fonts(300, 26px, 26px, #FFF);
+      white-space: nowrap;
+    }
+
+    & .description{
+      @include fonts(400, 12px, 12px, #FFF);
+    }
+  }
+
+  & .feels_like{
+    height: 112px;
+    @include display-flex(space-between, flex-start);
+    gap: 4px;
+    flex-direction: column;
+    padding-top: 10px;
+
+    & .value{
+      @include fonts(300, 26px, 26px, #FFF);
+      white-space: nowrap;
+    }
+
+    & .description{
+      @include fonts(400, 12px, 12px, #FFF);
+    }
+  }
+
+  & .pressure{
+    height: 112px;
+    @include display-flex;
+    position: relative;
+
+    & .description{
+      @include fonts(400, 10px, 10px, #FFF);
+    }
+
+    & .of_mercury{
+      position: absolute;
+      left: 10px;
+      top: 30%;
+      @include fonts(300, 26px, 26px, #FFF);
+    }
+
+    & .mmHg{
+      position: absolute;
+      left: 10px;
+      top: 52%;
+      @include fonts(400, 10px, 10px, #FFF);
+    }
+
+
+  }
+
 
 
 

@@ -4,13 +4,24 @@ import SegmentedControl from "./SegmentedControl.jsx";
 import Forecast from "./forecast/Forecast.jsx";
 import TabBar from "./tabBar/TabBar.jsx";
 import PropTypes from "prop-types";
+import {Sunrise, Uvi, Wind, RainSnow} from "./weatherDetails";
+import Universal from "./weatherDetails/Universal.jsx";
+import {feels_like, visibilityIcon, humidityIcon} from "../../assets/image";
+import {toCelsius} from "../../helpers/index.js";
+import Pressure from "./weatherDetails/Pressure.jsx";
 
 import styles from "./allInformation.module.scss"
-import {Sunrise, Uvi, Wind} from "./weatherDetails";
 
 
 const AllInformation = ({forecastData, isWeekly, setIsWeekly, height, handleTouchMove, weatherDetails}) => {
-const {uv, sunrise, sunset, windDeg, windSpeed} = weatherDetails
+const {uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity, dewPoint, visibility,
+    pressure} = weatherDetails
+
+    const feelsLikeStr = `${toCelsius(feelsLike)}°`
+    const humidityStr = `${humidity}%`;
+    const humidityDesc = `The dew point is ${toCelsius(dewPoint)}° right now`;
+    const visibilityStr = `${visibility/1000} km`
+
 
     const setMode = () => {
         setIsWeekly(pre=>!pre)
@@ -36,6 +47,26 @@ const {uv, sunrise, sunset, windDeg, windSpeed} = weatherDetails
                 <Uvi uv={uv}/>
                 <Sunrise  sunrise={sunrise} sunset={sunset}/>
                 <Wind windDeg={windDeg} windSpeed={windSpeed} />
+                {rain && <RainSnow value={rain} title="rainfall"/>}
+                {snow && <RainSnow value={snow} title="snowfall"/>}
+                <Universal
+                    value={feelsLikeStr}
+                    title="feels like"
+                    description="Similar to the actual temperature"
+                    icon={feels_like}
+                />
+                <Universal
+                    value={humidityStr}
+                    title="humidity"
+                    description={humidityDesc}
+                    icon={humidityIcon}
+                />
+                <Universal
+                    value={visibilityStr}
+                    title="visibility"
+                    icon={visibilityIcon}
+                />
+                <Pressure value={pressure} />
             </div>}
         </div>
     );
