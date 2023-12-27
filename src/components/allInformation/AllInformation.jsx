@@ -31,7 +31,7 @@ const {uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity,
         <div
             className={styles.all_information}
             style={{height: `${height}px`}}
-            onTouchMove={handleTouchMove}
+            // onTouchMove={handleTouchMove}
         >
             <div className={styles.top_ellipse1}/>
             {(height < 350) && <img className={styles.border} alt='border' src={rectangle}/>}
@@ -41,33 +41,36 @@ const {uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity,
             <div className={styles.ellipse4}/>
 
             <SegmentedControl isWeekly={isWeekly} setMode={setMode} handleMouseDown={handleTouchMove}/>
-            <Forecast forecastData={forecastData} isWeekly={isWeekly} />
-            {(height < 350) && <TabBar/>}
-            {(height > 350) && <div className={styles.weather_details}>
-                <Uvi uv={uv}/>
-                <Sunrise  sunrise={sunrise} sunset={sunset}/>
-                <Wind windDeg={windDeg} windSpeed={windSpeed} />
-                {rain && <RainSnow value={rain} title="rainfall"/>}
-                {snow && <RainSnow value={snow} title="snowfall"/>}
-                <Universal
-                    value={feelsLikeStr}
-                    title="feels like"
-                    description="Similar to the actual temperature"
-                    icon={feels_like}
-                />
-                <Universal
-                    value={humidityStr}
-                    title="humidity"
-                    description={humidityDesc}
-                    icon={humidityIcon}
-                />
-                <Universal
-                    value={visibilityStr}
-                    title="visibility"
-                    icon={visibilityIcon}
-                />
-                <Pressure value={pressure} />
-            </div>}
+            <div className={styles.all_information_wrap}>
+                <Forecast forecastData={forecastData} isWeekly={isWeekly} />
+                {(height < 350) && <TabBar/>}
+                {(height > 350) && <div className={styles.weather_details}>
+                    <Uvi uv={uv}/>
+                    <Sunrise  sunrise={sunrise} sunset={sunset}/>
+                    <Wind windDeg={windDeg} windSpeed={windSpeed} />
+                    {rain && <RainSnow value={rain} title="rainfall"/>}
+                    {snow && <RainSnow value={snow} title="snowfall"/>}
+                    <Universal
+                        value={feelsLikeStr}
+                        title="feels like"
+                        description="Similar to the actual temperature"
+                        icon={feels_like}
+                    />
+                    <Universal
+                        value={humidityStr}
+                        title="humidity"
+                        description={humidityDesc}
+                        icon={humidityIcon}
+                    />
+                    <Universal
+                        value={visibilityStr}
+                        title="visibility"
+                        icon={visibilityIcon}
+                    />
+                    <Pressure value={pressure} />
+                </div>}
+            </div>
+
         </div>
     );
 };
