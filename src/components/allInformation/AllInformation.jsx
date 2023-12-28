@@ -1,5 +1,5 @@
 
-import {rectangle, ellipse1, ellipse2, ellipse3} from "../../assets/svgElement";
+import { ellipse1, ellipse2, ellipse3} from "../../assets/svgElement";
 import SegmentedControl from "./SegmentedControl.jsx";
 import Forecast from "./forecast/Forecast.jsx";
 import TabBar from "./tabBar/TabBar.jsx";
@@ -35,7 +35,7 @@ const {uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity,
         >
             <div className={styles.top_ellipse1}/>
             {/*{(height < 350) && <img className={styles.border} alt='border' src={rectangle}/>}*/}
-            <img className={styles.border} alt='border' src={rectangle}/>
+            {/*<img className={styles.border} alt='border' src={rectangle}/>*/}
             <img alt="ellipse" src={ellipse1} className={styles.ellipse1}/>
             <img alt="ellipse" src={ellipse2} className={styles.top_ellipse2}/>
             <img alt="ellipse" src={ellipse3} className={styles.ellipse3}/>
