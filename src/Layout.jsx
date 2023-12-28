@@ -23,7 +23,7 @@ const Layout = ({weatherData, promptData}) => {
     return (
         <div
             className={styles.content}
-            style={{paddingTop: (blockHeight > 350)?"52px" : "98px"}}
+            style={{paddingTop: (blockHeight > 350)?"32px" : "98px"}}
         >
             <div className={styles.house}/>
             <div className={styles.shadow}/>
