@@ -34,20 +34,21 @@ const {uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity,
             // onTouchMove={handleTouchMove}
         >
             <div className={styles.top_ellipse1}/>
-            {(height < 350) && <img className={styles.border} alt='border' src={rectangle}/>}
+            {/*{(height < 350) && <img className={styles.border} alt='border' src={rectangle}/>}*/}
+            <img className={styles.border} alt='border' src={rectangle}/>
             <img alt="ellipse" src={ellipse1} className={styles.ellipse1}/>
             <img alt="ellipse" src={ellipse2} className={styles.top_ellipse2}/>
             <img alt="ellipse" src={ellipse3} className={styles.ellipse3}/>
             <div className={styles.ellipse4}/>
 
-            <SegmentedControl isWeekly={isWeekly} setMode={setMode} handleMouseDown={handleTouchMove}/>
+            <SegmentedControl handleMouseDown={handleTouchMove}/>
             <div className={styles.all_information_wrap}>
-                <Forecast forecastData={forecastData} isWeekly={isWeekly} />
+                <Forecast forecastData={forecastData} isWeekly={isWeekly} setMode={setMode}/>
                 {(height < 350) && <TabBar/>}
                 {(height > 350) && <div className={styles.weather_details}>
                     <Uvi uv={uv}/>
-                    <Sunrise  sunrise={sunrise} sunset={sunset}/>
-                    <Wind windDeg={windDeg} windSpeed={windSpeed} />
+                    <Sunrise sunrise={sunrise} sunset={sunset}/>
+                    <Wind windDeg={windDeg} windSpeed={windSpeed}/>
                     {rain && <RainSnow value={rain} title="rainfall"/>}
                     {snow && <RainSnow value={snow} title="snowfall"/>}
                     <Universal
@@ -67,7 +68,7 @@ const {uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity,
                         title="visibility"
                         icon={visibilityIcon}
                     />
-                    <Pressure value={pressure} />
+                    <Pressure value={pressure}/>
                 </div>}
             </div>
 
