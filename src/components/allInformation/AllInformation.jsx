@@ -13,7 +13,7 @@ import Pressure from "./weatherDetails/Pressure.jsx";
 import styles from "./allInformation.module.scss";
 
 
-const AllInformation = ({forecastData, isWeekly, setIsWeekly, height, handleTouchMove, weatherDetails}) => {
+const AllInformation = ({forecastData, isWeekly, setIsWeekly, height, handleTouchMove, weatherDetails, detailsOn}) => {
 const {uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity, dewPoint, visibility,
     pressure} = weatherDetails
 
@@ -42,7 +42,7 @@ const {uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity,
             <div className={styles.ellipse4}/>
 
             <SegmentedControl handleMouseDown={handleTouchMove}/>
-            <div className={styles.all_information_wrap}>
+            <div className={styles.all_information_wrap} style={{paddingBottom: detailsOn? "50px": "0"}}>
                 <Forecast forecastData={forecastData} isWeekly={isWeekly} setMode={setMode}/>
                 {(height < 350) && <TabBar/>}
                 {(height > 350) && <div className={styles.weather_details}>
@@ -79,6 +79,7 @@ const {uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity,
 AllInformation.propTypes = {
     forecastData: PropTypes.array.isRequired,
     isWeekly: PropTypes.bool.isRequired,
+    detailsOn: PropTypes.bool.isRequired,
     setIsWeekly: PropTypes.func.isRequired,
     handleTouchMove: PropTypes.func.isRequired,
     height: PropTypes.number.isRequired,
