@@ -11,11 +11,30 @@ import {toCelsius} from "../../helpers/index.js";
 import Pressure from "./weatherDetails/Pressure.jsx";
 
 import styles from "./allInformation.module.scss"
+import {useEffect} from "react";
 
 
 const AllInformation = ({forecastData, isWeekly, setIsWeekly, height, handleTouchMove, weatherDetails}) => {
 const {uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity, dewPoint, visibility,
     pressure} = weatherDetails
+
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.keyCode === 40) {
+                event.preventDefault();
+                // Add your code for dynamic content loading here
+            }
+        };
+
+        // Add event listener when the component mounts
+        document.addEventListener('keydown', handleKeyDown);
+
+        // Cleanup the event listener when the component unmounts
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []); // Empty dependency array ensures the effect runs only once (on mount)
+
 
     const feelsLikeStr = `${toCelsius(feelsLike)}°`
     const humidityStr = `${humidity}%`;
