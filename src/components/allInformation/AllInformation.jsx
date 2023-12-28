@@ -10,43 +10,12 @@ import {feels_like, visibilityIcon, humidityIcon} from "../../assets/image";
 import {toCelsius} from "../../helpers/index.js";
 import Pressure from "./weatherDetails/Pressure.jsx";
 
-import styles from "./allInformation.module.scss"
-import {useEffect} from "react";
+import styles from "./allInformation.module.scss";
 
 
 const AllInformation = ({forecastData, isWeekly, setIsWeekly, height, handleTouchMove, weatherDetails}) => {
 const {uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity, dewPoint, visibility,
     pressure} = weatherDetails
-
-    useEffect(() => {
-        let startY;
-
-        const handleTouchStart = (e) => {
-            // Save the initial touch coordinates
-            startY = e.touches[0].clientY;
-        };
-
-        const handleTouchMove = (e) => {
-            // Calculate the difference between initial and current touch coordinates
-            const deltaY = e.touches[0].clientY - startY;
-
-            // If the difference is positive (swipe down) and current scroll is at the top
-            if (deltaY > 0 && window.scrollY === 0) {
-                e.preventDefault(); // Prevent the default action (scrolling)
-            }
-        };
-
-        // Add event listeners when the component mounts
-        document.body.addEventListener('touchstart', handleTouchStart);
-        document.body.addEventListener('touchmove', handleTouchMove);
-
-        // Cleanup the event listeners when the component unmounts
-        return () => {
-            document.body.removeEventListener('touchstart', handleTouchStart);
-            document.body.removeEventListener('touchmove', handleTouchMove);
-        };
-    }, []); // Empty dependency array ensures the effect runs only once (on mount)
-
 
     const feelsLikeStr = `${toCelsius(feelsLike)}°`
     const humidityStr = `${humidity}%`;
