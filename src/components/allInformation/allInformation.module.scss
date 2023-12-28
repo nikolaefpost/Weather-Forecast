@@ -3,12 +3,13 @@
 
 .all_information{
   position: absolute;
-  //padding-top: 1px;
+  //padding-top: 2px;
   bottom: 0;
   width: 100%;
   height: 325px;
   z-index: 2;
   border-radius: 44px 44px 0 0 ;
+  border-top: 1px solid #fff4ea;
   background: linear-gradient(168deg, rgba(46, 51, 90, 0.26) -4.68%, rgba(28, 27, 51, 0.26) 95.45%);
 
   & .border{
@@ -86,6 +87,7 @@
     backdrop-filter: blur(10px);
     border-radius: 44px 44px 0 0;
     overflow: hidden;
+    margin: 0 4px;
 
 
     & .shape{
