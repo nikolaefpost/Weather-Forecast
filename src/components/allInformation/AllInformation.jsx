@@ -19,19 +19,31 @@ const {uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity,
     pressure} = weatherDetails
 
     useEffect(() => {
-        const handleKeyDown = (event) => {
-            if (event.keyCode === 40) {
-                event.preventDefault();
-                // Add your code for dynamic content loading here
+        let startY;
+
+        const handleTouchStart = (e) => {
+            // Save the initial touch coordinates
+            startY = e.touches[0].clientY;
+        };
+
+        const handleTouchMove = (e) => {
+            // Calculate the difference between initial and current touch coordinates
+            const deltaY = e.touches[0].clientY - startY;
+
+            // If the difference is positive (swipe down) and current scroll is at the top
+            if (deltaY > 0 && window.scrollY === 0) {
+                e.preventDefault(); // Prevent the default action (scrolling)
             }
         };
 
-        // Add event listener when the component mounts
-        document.addEventListener('keydown', handleKeyDown);
+        // Add event listeners when the component mounts
+        document.body.addEventListener('touchstart', handleTouchStart);
+        document.body.addEventListener('touchmove', handleTouchMove);
 
-        // Cleanup the event listener when the component unmounts
+        // Cleanup the event listeners when the component unmounts
         return () => {
-            document.removeEventListener('keydown', handleKeyDown);
+            document.body.removeEventListener('touchstart', handleTouchStart);
+            document.body.removeEventListener('touchmove', handleTouchMove);
         };
     }, []); // Empty dependency array ensures the effect runs only once (on mount)
 
