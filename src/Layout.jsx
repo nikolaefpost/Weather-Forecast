@@ -13,7 +13,7 @@ const Layout = ({weatherData, promptData}) => {
 
     const handleTouchMove = (e) => {
         let newHeight = screenHeight - e.touches[0].clientY; // Adjust sensitivity as needed
-        newHeight = newHeight > screenHeight-150 ? screenHeight-150:newHeight;
+        newHeight = newHeight > screenHeight-200 ? screenHeight-200:newHeight;
         setBlockHeight(Math.max(325, newHeight)); // Ensure a minimum height
     };
 
