@@ -11,6 +11,7 @@ import {toCelsius} from "../../helpers/index.js";
 import Pressure from "./weatherDetails/Pressure.jsx";
 
 import styles from "./allInformation.module.scss";
+import LocationComponent from "./tabBar/LocationComponent.jsx";
 
 
 const AllInformation = ({forecastData, isWeekly, setIsWeekly, height, handleTouchMove, weatherDetails, detailsOn}) => {
@@ -69,7 +70,9 @@ const {uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity,
                         icon={visibilityIcon}
                     />
                     <Pressure value={pressure}/>
+
                 </div>}
+                {(height > 350) &&<LocationComponent/>}
             </div>
 
         </div>

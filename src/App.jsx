@@ -11,7 +11,7 @@ function App() {
     const promt = "Odessa";
 
     const {error, promptData, locationData, weatherData} = useApiRequests(promt);
-    console.log(weatherData)
+    console.log(locationData)
 
 
 
