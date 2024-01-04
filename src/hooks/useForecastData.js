@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {monthData, toCelsius, weekData} from "../helpers/index.js";
 
-const useForecastData = (weatherData, promptData, isWeekly) => {
+const useForecastData = (weatherData, locationString, isWeekly) => {
 
     const [forecastData, setForecastData] = useState([]);
     const [dailyData, setDailyData] = useState({
@@ -18,7 +18,7 @@ const useForecastData = (weatherData, promptData, isWeekly) => {
         if (!weatherData?.daily) return;
 
         setDailyData({
-            locationString: promptData?.locationString,
+            locationString: locationString,
             temp: weatherData?.current?.temp,
             description: weatherData?.current?.weather[0].description,
             minTemp: weatherData?.daily[0].temp.min,
@@ -70,7 +70,7 @@ const useForecastData = (weatherData, promptData, isWeekly) => {
             }
         })
         setForecastData(isWeekly? weekly: hourly);
-    }, [weatherData, promptData, isWeekly]);
+    }, [weatherData, locationString, isWeekly]);
 
     return [dailyData, forecastData, weatherDetails];
 

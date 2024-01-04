@@ -3,14 +3,18 @@ import {AllInformation, DailyBasic, DailyBasicShort} from "./components/index.js
 import useForecastData from "./hooks/useForecastData.js";
 
 import styles from "./App.module.scss";
-import PropTypes from "prop-types";
+import {useSelector} from "react-redux";
 
-const Layout = ({weatherData, promptData}) => {
+
+const Layout = () => {
+
     const [isWeekly, setIsWeekly]= useState(false)
     const [blockHeight, setBlockHeight] = useState(325);
     const [detailsOn, setDetailsOn] = useState(false)
     const screenHeight = window.screen.height;
 
+    const {  city, loading, error} = useSelector((state) => state.location);
+    const { weatherData } = useSelector((state) => state.weather);
 
     const handleTouchMove = (e) => {
         let newHeight = screenHeight - e.touches[0].clientY; // Adjust sensitivity as needed
@@ -25,7 +29,7 @@ const Layout = ({weatherData, promptData}) => {
     };
 
 
-    const [dailyData, forecastData, weatherDetails] = useForecastData(weatherData, promptData, isWeekly)
+    const [dailyData, forecastData, weatherDetails] = useForecastData(weatherData, city, isWeekly)
 
     return (
         <div
@@ -34,7 +38,7 @@ const Layout = ({weatherData, promptData}) => {
         >
             <div className={styles.house}/>
             <div className={styles.shadow}/>
-            {(blockHeight > 350)? <DailyBasicShort {...dailyData}/> : <DailyBasic {...dailyData}/>}
+            {(blockHeight > 350 )? <DailyBasicShort {...dailyData} loading={loading} /> : <DailyBasic {...dailyData} loading={loading}/>}
             <AllInformation
                 forecastData={forecastData}
                 weatherDetails={weatherDetails}
@@ -48,10 +52,7 @@ const Layout = ({weatherData, promptData}) => {
     );
 };
 
-Layout.propTypes = {
-    weatherData: PropTypes.object.isRequired,
-    promptData: PropTypes.object.isRequired,
-};
+
 
 
 export default Layout;

@@ -7,7 +7,7 @@ const locationSlice = createSlice({
         longitude: null,
         loading: false,
         error: null,
-        city: "Odessa",
+        city: "",
     },
     reducers: {
         getLocationStart: (state) => {

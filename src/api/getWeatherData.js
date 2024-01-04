@@ -1,12 +1,13 @@
 import PropTypes from "prop-types";
 
 // Fetch weather data from OpenWeatherMap API.
-const getWeatherData = async (locationData) => {
+const getWeatherData = async (latitude, longitude) => {
+    console.log(latitude, longitude)
     try {
         const response = await fetch(
             `https://api.openweathermap.org/data/3.0/onecall?lat=${
-                locationData[0].lat
-            }&lon=${locationData[0].lon}&APPID=${import.meta.env.VITE_OWM}`
+                latitude
+            }&lon=${longitude}&APPID=${import.meta.env.VITE_OWM}`
         );
         const weatherData = await response.json();
         return weatherData;

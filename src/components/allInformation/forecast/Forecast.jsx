@@ -1,9 +1,10 @@
 
 import ForecastItem from "./ForecastItem.jsx";
 import PropTypes from "prop-types";
+import cn from "classnames";
 
 import styles from "../allInformation.module.scss"
-import cn from "classnames";
+
 
 
 const Forecast = ({forecastData, isWeekly, setMode}) => {

@@ -23,7 +23,7 @@ const promptToLocation = (prompt) => {
                         },
                         countryCode: {
                             type: "string",
-                            description: "Country code. Use ISO-3166",
+                            description: "Country code. Use ISO_3166-1_alpha-2",
                         },
                         USstate: {
                             type: "string",
@@ -80,9 +80,9 @@ const promptToLocation = (prompt) => {
 
             const locationString = () => {
                 if (promptRes.countryCode === "US") {
-                    return `${promptRes.city},${promptRes.state},${promptRes.country}`;
+                    return `${promptRes.city},${promptRes.state}, ${promptRes.countryCode}`;
                 } else {
-                    return `${promptRes.city},${promptRes.country}`;
+                    return `${promptRes.city}, ${promptRes.countryCode}`;
                 }
             };
 

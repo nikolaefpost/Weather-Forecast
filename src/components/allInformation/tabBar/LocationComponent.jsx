@@ -1,12 +1,10 @@
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getLocationStart, getLocationSuccess, getLocationFailure, setCity } from '../../../features/location/locationSlice.js';
 import {point} from "../../../assets/image";
 
 const LocationComponent = () => {
     const dispatch = useDispatch();
-    const { latitude, longitude, loading, error, city } = useSelector((state) => state.location);
-    console.log(city)
 
     const handleGetLocation = () => {
         dispatch(getLocationStart());
@@ -34,7 +32,12 @@ const LocationComponent = () => {
             const data = await response.json();
 
             if (data.results && data.results.length > 0) {
-                const city = data.results[0].components.city;
+                const city = data.results[0].components.city+ ", " + data.results[0].components['ISO_3166-1_alpha-2'];
+                localStorage.setItem("current", JSON.stringify({
+                    locationString: city,
+                    lat,
+                    lon
+                }));
                 console.log(data.results)
                 dispatch(setCity(city));
             } else {

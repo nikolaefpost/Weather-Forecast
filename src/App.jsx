@@ -1,26 +1,18 @@
 
-import useApiRequests from "./hooks/useApiRequests.js";
 import Layout from "./Layout.jsx";
 
 import styles from './App.module.scss'
-
-
-
+import {useApiPromptRequests, useApiWeather} from "./hooks/useApiRequests.js";
 
 function App() {
-    const promt = "Odessa";
-
-    const {error, promptData, locationData, weatherData} = useApiRequests(promt);
-    console.log(locationData)
-
-
-
+    const {error: errorPromt} = useApiPromptRequests("Odessa");
+    const {error } = useApiWeather();
 
     return (
         <div
             className={styles.container}
         >
-           <Layout promptData={promptData} weatherData={weatherData}/>
+           <Layout />
         </div>
     )
 }
