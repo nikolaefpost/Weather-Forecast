@@ -41,7 +41,7 @@ const LocationComponent = () => {
                 console.log(data.results)
                 dispatch(setCity(city));
             } else {
-                dispatch(setCity('Город не найден'));
+                dispatch(setCity(JSON.stringify(data.results)));
             }
         } catch (error) {
             console.error('Error fetching city:', error);
