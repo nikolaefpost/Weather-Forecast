@@ -38,10 +38,10 @@ const LocationComponent = () => {
                     lat,
                     lon
                 }));
-                console.log(data.results)
+                console.log(data)
                 dispatch(setCity(city));
             } else {
-                dispatch(setCity(`${lat} : ${lon}`));
+                dispatch(setCity(JSON.stringify(data.status)));
             }
         } catch (error) {
             console.error('Error fetching city:', error);
