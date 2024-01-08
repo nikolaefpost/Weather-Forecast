@@ -7,5 +7,6 @@ import snow from "./snow.png";
 import feels_like from "./feels_like.png";
 import humidityIcon from "./humidityIcon.png";
 import visibilityIcon from "./visibilityIcon.png";
+import searchIcon from "./searchIcon.png";
 
-export {point, menu, sunrise_func, wind, rain, snow, feels_like, humidityIcon, visibilityIcon}
+export {point, menu, sunrise_func, wind, rain, snow, feels_like, humidityIcon, visibilityIcon, searchIcon}

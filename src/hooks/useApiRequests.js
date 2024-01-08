@@ -10,61 +10,54 @@ import { setWeatherData } from '../features/weather/weatherSlice.js'
 const useApiPromptRequests = (prompt) => {
     const dispatch = useDispatch();
     const [error, setError] = useState(null);
-    console.log("Prompt");
+    console.log(prompt)
     // Fetch location and weather data from API.
     useEffect(() => {
+        console.log(prompt)
         const fetchData = async () => {
             if (!prompt) return; // return if prompt is null or undefined
             dispatch(getLocationStart());
             try {
                 const promptDataRes = await promptToLocation(prompt);
                 dispatch(setCity(promptDataRes.locationString));
-                console.log(promptDataRes.locationString)
-                // setPromptData(promptDataRes.locationString);
 
                 const locationDataRes = await locationToCoordinates(
                     promptDataRes.locationString
                 );
-                console.log(locationDataRes)
-                dispatch(getLocationSuccess({ latitude: locationDataRes[0].lat, longitude: locationDataRes[0].lon }));
-
-
-                // setLocationData(locationDataRes);
-
-                // const weatherDataRes = await getWeatherData(locationDataRes);
-                // setWeatherData(weatherDataRes);
-
-                // const weatherDescriptRes = await WeatherDescript(
-                //     prompt,
-                //     weatherDataRes
-                // );
-                // setWeatherDescription(weatherDescriptRes);
+                dispatch(getLocationSuccess({ latitude: locationDataRes.lat, longitude: locationDataRes.lon }));
             } catch (error) {
                 setError(error);
-                dispatch(getLocationFailure('Geolocation is not supported by your browser'));
+                dispatch(getLocationFailure(error));
                 console.error("Error:", error);
             }
         };
 
         fetchData();
 
-    }, [prompt]); // run effect when `prompt` changes
+    }, [prompt, dispatch]); // run effect when `prompt` changes
     return {
         error,
-        // weatherDescription
     };
 };
 
 
 
+
+
+
 const useApiWeather = () => {
     const dispatch = useDispatch();
+
+    const current = JSON.parse(localStorage.getItem('current'));
+
+    if (current?.locationString){
+        dispatch(getLocationSuccess({ latitude: current.lat, longitude: current.lon }));
+        dispatch(setCity(current.locationString));
+    }
+
     const { latitude, longitude, city } = useSelector((state) => state.location);
     const [error, setError] = useState(null);
 
-    // const [weatherData, setWeatherData] = useState({});
-    // const [weatherDescription, setWeatherDescription] = useState(null);
-    console.log("API");
     // Fetch location and weather data from API.
     useEffect(() => {
         const fetchData = async () => {
@@ -84,8 +77,6 @@ const useApiWeather = () => {
 
     return {
         error,
-        // weatherData,
-        // weatherDescription
     };
 };
 

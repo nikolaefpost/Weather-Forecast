@@ -1,7 +1,8 @@
 
-import styles from "./dailyBasic.module.scss"
 import {firstLetterCapitalized, toCelsius} from "../../helpers/index.js";
 import PropTypes from "prop-types";
+
+import styles from "./dailyBasic.module.scss";
 
 const DailyBasic = ({locationString, temp, description, minTemp, maxTemp, loading}) => {
     return (

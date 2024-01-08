@@ -93,7 +93,7 @@ const promptToLocation = (prompt) => {
                 USstate: promptRes.USstate
             }
 
-            localStorage.setItem(prompt, JSON.stringify(promptData));
+            if (promptRes?.city) localStorage.setItem(prompt, JSON.stringify(promptData));
 
             return promptData;
         })

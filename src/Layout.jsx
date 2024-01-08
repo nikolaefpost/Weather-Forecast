@@ -1,5 +1,5 @@
 import  {useState} from 'react';
-import {AllInformation, DailyBasic, DailyBasicShort} from "./components/index.js";
+import {AllInformation, Daily, SearchCity} from "./components";
 import useForecastData from "./hooks/useForecastData.js";
 
 import styles from "./App.module.scss";
@@ -10,11 +10,14 @@ const Layout = () => {
 
     const [isWeekly, setIsWeekly]= useState(false)
     const [blockHeight, setBlockHeight] = useState(325);
-    const [detailsOn, setDetailsOn] = useState(false)
+    const [detailsOn, setDetailsOn] = useState(false);
+    const [isSearch, setIsSearch] = useState(false);
     const screenHeight = window.screen.height;
 
     const {  city, loading, error} = useSelector((state) => state.location);
     const { weatherData } = useSelector((state) => state.weather);
+
+    const onHandleSearch = () => setIsSearch(true)
 
     const handleTouchMove = (e) => {
         let newHeight = screenHeight - e.touches[0].clientY; // Adjust sensitivity as needed
@@ -38,7 +41,7 @@ const Layout = () => {
         >
             <div className={styles.house}/>
             <div className={styles.shadow}/>
-            {(blockHeight > 350 )? <DailyBasicShort {...dailyData} loading={loading} /> : <DailyBasic {...dailyData} loading={loading}/>}
+            {!isSearch?<Daily blockHeight={blockHeight} dailyData={dailyData} loading={loading}/>:<SearchCity setIsSearch={setIsSearch}/>}
             <AllInformation
                 forecastData={forecastData}
                 weatherDetails={weatherDetails}
@@ -47,6 +50,7 @@ const Layout = () => {
                 height={blockHeight}
                 handleTouchMove={handleTouchMove}
                 detailsOn={detailsOn}
+                onHandleSearch={onHandleSearch}
             />
         </div>
     );

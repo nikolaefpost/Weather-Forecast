@@ -4,10 +4,7 @@ import PropTypes from "prop-types";
 const locationToCoordinates = async (locationString) => {
 
     const coordinatesData = JSON.parse(localStorage.getItem(locationString));
-    if (coordinatesData?.length)  return coordinatesData;
-    console.log(coordinatesData)
-
-
+    if (coordinatesData?.length)  return coordinatesData
 
     try {
         const response = await fetch(
@@ -18,8 +15,15 @@ const locationToCoordinates = async (locationString) => {
         if (locationData.length === 0) {
             throw new Error("No location by that name. Try again.");
         }
-        localStorage.setItem(locationString, JSON.stringify(locationData));
-        return locationData;
+
+        const dataResult = {
+            locationString: locationString,
+            lat: locationData[0].lat,
+            lon: locationData[0].lon
+        }
+        localStorage.setItem(locationString, JSON.stringify(dataResult));
+        localStorage.setItem("current", JSON.stringify(dataResult));
+        return dataResult;
     } catch (error) {
         console.error("Error:", error);
         return await Promise.reject(error);

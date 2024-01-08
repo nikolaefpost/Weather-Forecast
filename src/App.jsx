@@ -2,11 +2,10 @@
 import Layout from "./Layout.jsx";
 
 import styles from './App.module.scss'
-import {useApiPromptRequests, useApiWeather} from "./hooks/useApiRequests.js";
+import { useApiWeather} from "./hooks/useApiRequests.js";
 
 function App() {
-    const {error: errorPromt} = useApiPromptRequests("Odessa");
-    const {error } = useApiWeather();
+    const { error } = useApiWeather();
 
     return (
         <div

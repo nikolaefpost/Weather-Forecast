@@ -14,7 +14,7 @@ import styles from "./allInformation.module.scss";
 import LocationComponent from "./tabBar/LocationComponent.jsx";
 
 
-const AllInformation = ({forecastData, isWeekly, setIsWeekly, height, handleTouchMove, weatherDetails, detailsOn}) => {
+const AllInformation = ({forecastData, isWeekly, setIsWeekly, height, handleTouchMove, weatherDetails, detailsOn, onHandleSearch}) => {
 const {uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity, dewPoint, visibility,
     pressure} = weatherDetails
 
@@ -45,7 +45,7 @@ const {uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity,
             <SegmentedControl handleMouseDown={handleTouchMove}/>
             <div className={styles.all_information_wrap} style={{paddingBottom: detailsOn? "50px": "0"}}>
                 <Forecast forecastData={forecastData} isWeekly={isWeekly} setMode={setMode}/>
-                {(height < 350) && <TabBar/>}
+                {(height < 350) && <TabBar onHandleSearch={onHandleSearch} />}
                 {(height > 350) && <div className={styles.weather_details}>
                     <Uvi uv={uv}/>
                     <Sunrise sunrise={sunrise} sunset={sunset}/>
@@ -87,6 +87,7 @@ AllInformation.propTypes = {
     handleTouchMove: PropTypes.func.isRequired,
     height: PropTypes.number.isRequired,
     weatherDetails: PropTypes.object.isRequired,
+    onHandleSearch: PropTypes.func.isRequired
 };
 
 export default AllInformation;

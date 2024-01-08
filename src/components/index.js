@@ -1,5 +1,5 @@
-import DailyBasic from "./dailyBasic/DailyBasic.jsx";
-import DailyBasicShort from "./dailyBasic/DailyBasicShort.jsx";
-import AllInformation from "./allInformation/AllInformation.jsx"
+import Daily from "./dailyBasic/Daily.jsx";
+import AllInformation from "./allInformation/AllInformation.jsx";
+import SearchCity from "./search/SearchCity.jsx"
 
-export {DailyBasic, AllInformation, DailyBasicShort}
+export {Daily, AllInformation, SearchCity}
