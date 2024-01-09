@@ -1,11 +1,10 @@
 import  {useState} from 'react';
-
-import styles from './serchCity.module.scss'
 import {searchIcon} from "../../assets/image";
 import PropTypes from "prop-types";
-// import {useApiPromptRequests} from "../../hooks/useApiRequests.js";
 import fetchDataPrompt from "../../api/fetchDataPrompt.js";
 import {useDispatch} from "react-redux";
+
+import styles from './serchCity.module.scss'
 
 const SearchCity = ({setIsSearch}) => {
     const dispatch = useDispatch();

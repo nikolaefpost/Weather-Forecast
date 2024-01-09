@@ -1,5 +1,4 @@
-
-import { ellipse1, ellipse2, ellipse3} from "../../assets/svgElement";
+import {ellipse1, ellipse2, ellipse3} from "../../assets/svgElement";
 import SegmentedControl from "./SegmentedControl.jsx";
 import Forecast from "./forecast/Forecast.jsx";
 import TabBar from "./tabBar/TabBar.jsx";
@@ -11,21 +10,37 @@ import {toCelsius} from "../../helpers/index.js";
 import Pressure from "./weatherDetails/Pressure.jsx";
 
 import styles from "./allInformation.module.scss";
-import LocationComponent from "./tabBar/LocationComponent.jsx";
 
 
-const AllInformation = ({forecastData, isWeekly, setIsWeekly, height, handleTouchMove, weatherDetails, detailsOn, onHandleSearch}) => {
-const {uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity, dewPoint, visibility,
-    pressure} = weatherDetails
+
+const AllInformation = ({
+                            forecastData,
+                            isWeekly,
+                            setIsWeekly,
+                            height,
+                            handleTouchMove,
+                            weatherDetails,
+                            detailsOn,
+                            onHandleSearch,
+                            onHandleSettingToggle,
+                            settingsData
+                        }) => {
+    const {
+        uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity, dewPoint, visibility,
+        pressure
+    } = weatherDetails;
+
+
+
 
     const feelsLikeStr = `${toCelsius(feelsLike)}°`
     const humidityStr = `${humidity}%`;
     const humidityDesc = `The dew point is ${toCelsius(dewPoint)}° right now`;
-    const visibilityStr = `${visibility/1000} km`
+    const visibilityStr = `${visibility / 1000} km`
 
 
     const setMode = () => {
-        setIsWeekly(pre=>!pre)
+        setIsWeekly(pre => !pre)
     }
 
     return (
@@ -43,36 +58,36 @@ const {uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity,
             <div className={styles.ellipse4}/>
 
             <SegmentedControl handleMouseDown={handleTouchMove}/>
-            <div className={styles.all_information_wrap} style={{paddingBottom: detailsOn? "50px": "0"}}>
+            <div className={styles.all_information_wrap} style={{paddingBottom: detailsOn ? "50px" : "0"}}>
                 <Forecast forecastData={forecastData} isWeekly={isWeekly} setMode={setMode}/>
-                {(height < 350) && <TabBar onHandleSearch={onHandleSearch} />}
+                {(height < 350) && <TabBar onHandleSearch={onHandleSearch} onHandleSettingToggle={onHandleSettingToggle}/>}
                 {(height > 350) && <div className={styles.weather_details}>
-                    <Uvi uv={uv}/>
-                    <Sunrise sunrise={sunrise} sunset={sunset}/>
-                    <Wind windDeg={windDeg} windSpeed={windSpeed}/>
+                    {settingsData.uvi && <Uvi uv={uv}/>}
+                    {settingsData.sunrise && <Sunrise sunrise={sunrise} sunset={sunset}/>}
+                    {settingsData.wind && <Wind windDeg={windDeg} windSpeed={windSpeed}/>}
                     {rain && <RainSnow value={rain} title="rainfall"/>}
                     {snow && <RainSnow value={snow} title="snowfall"/>}
-                    <Universal
+                    {settingsData.feelsLike && <Universal
                         value={feelsLikeStr}
                         title="feels like"
                         description="Similar to the actual temperature"
                         icon={feels_like}
-                    />
-                    <Universal
+                    />}
+                    {settingsData.humidity && <Universal
                         value={humidityStr}
                         title="humidity"
                         description={humidityDesc}
                         icon={humidityIcon}
-                    />
-                    <Universal
+                    />}
+                    {settingsData.visibility && <Universal
                         value={visibilityStr}
                         title="visibility"
                         icon={visibilityIcon}
-                    />
-                    <Pressure value={pressure}/>
+                    />}
+                    {settingsData.pressure && <Pressure value={pressure}/>}
 
                 </div>}
-                {(height > 350) &&<LocationComponent/>}
+                {/*{(height > 350) && <LocationComponent/>}*/}
             </div>
 
         </div>
@@ -87,7 +102,10 @@ AllInformation.propTypes = {
     handleTouchMove: PropTypes.func.isRequired,
     height: PropTypes.number.isRequired,
     weatherDetails: PropTypes.object.isRequired,
-    onHandleSearch: PropTypes.func.isRequired
+    onHandleSearch: PropTypes.func.isRequired,
+    onHandleSettingToggle: PropTypes.func.isRequired,
+    settingsData: PropTypes.object.isRequired,
+
 };
 
 export default AllInformation;

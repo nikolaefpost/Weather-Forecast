@@ -1,9 +1,10 @@
-import  {useState} from 'react';
-import {AllInformation, Daily, SearchCity} from "./components";
+import { useState} from 'react';
+import {AllInformation, Daily, SearchCity, Settings} from "./components";
 import useForecastData from "./hooks/useForecastData.js";
+import {useSelector} from "react-redux";
+import useSetting from "./hooks/useSetting.js";
 
 import styles from "./App.module.scss";
-import {useSelector} from "react-redux";
 
 
 const Layout = () => {
@@ -12,12 +13,16 @@ const Layout = () => {
     const [blockHeight, setBlockHeight] = useState(325);
     const [detailsOn, setDetailsOn] = useState(false);
     const [isSearch, setIsSearch] = useState(false);
+    const [isSetting, setIsSetting] = useState(false);
     const screenHeight = window.screen.height;
 
     const {  city, loading, error} = useSelector((state) => state.location);
     const { weatherData } = useSelector((state) => state.weather);
 
+    const {settingsData, setSettingsData} = useSetting();
+
     const onHandleSearch = () => setIsSearch(true)
+    const onHandleSettingToggle = () => setIsSetting(pre=>!pre);
 
     const handleTouchMove = (e) => {
         let newHeight = screenHeight - e.touches[0].clientY; // Adjust sensitivity as needed
@@ -41,7 +46,13 @@ const Layout = () => {
         >
             <div className={styles.house}/>
             <div className={styles.shadow}/>
-            {!isSearch?<Daily blockHeight={blockHeight} dailyData={dailyData} loading={loading}/>:<SearchCity setIsSearch={setIsSearch}/>}
+            {!isSearch && !isSetting && <Daily blockHeight={blockHeight} dailyData={dailyData} loading={loading}/>}
+            {isSearch && <SearchCity setIsSearch={setIsSearch}/>}
+            {isSetting && <Settings
+                setIsSetting={setIsSetting}
+                setSettingsData={setSettingsData}
+                settingsData={settingsData}
+            />}
             <AllInformation
                 forecastData={forecastData}
                 weatherDetails={weatherDetails}
@@ -51,6 +62,8 @@ const Layout = () => {
                 handleTouchMove={handleTouchMove}
                 detailsOn={detailsOn}
                 onHandleSearch={onHandleSearch}
+                onHandleSettingToggle={onHandleSettingToggle}
+                settingsData={settingsData}
             />
         </div>
     );

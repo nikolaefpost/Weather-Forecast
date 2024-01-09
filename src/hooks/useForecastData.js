@@ -16,6 +16,7 @@ const useForecastData = (weatherData, locationString, isWeekly) => {
 
     useEffect(() => {
         if (!weatherData?.daily) return;
+        console.log(weatherData)
 
         setDailyData({
             locationString: locationString,

@@ -5,7 +5,7 @@ import {menu} from "../../../assets/image"
 import LocationComponent from "./LocationComponent.jsx";
 import PropTypes from "prop-types";
 
-const TabBar = ({onHandleSearch}) => {
+const TabBar = ({onHandleSearch, onHandleSettingToggle}) => {
     return (
         <div className={styles.tab_bar}>
             <div className={styles.back}>
@@ -13,7 +13,7 @@ const TabBar = ({onHandleSearch}) => {
                 <div className={styles.menu_block}>
                     {/*<input type="image" src={point} alt="point"/>*/}
                     <LocationComponent/>
-                    <input type="image" src={menu} alt="menu"/>
+                    <input type="image" src={menu} alt="menu" onClick={onHandleSettingToggle}/>
                 </div>
             </div>
             <div className={styles.front}>
@@ -25,7 +25,8 @@ const TabBar = ({onHandleSearch}) => {
 };
 
 TabBar.propTypes = {
-    onHandleSearch: PropTypes.func.isRequired
+    onHandleSearch: PropTypes.func.isRequired,
+    onHandleSettingToggle: PropTypes.func.isRequired
 };
 
 export default TabBar;
