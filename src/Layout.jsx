@@ -1,10 +1,11 @@
 import { useState} from 'react';
-import {AllInformation, Daily, SearchCity, Settings} from "./components";
+import {AllInformation, Daily, SearchCity, Settings, GoogleMap} from "./components";
 import useForecastData from "./hooks/useForecastData.js";
 import {useSelector} from "react-redux";
 import useSetting from "./hooks/useSetting.js";
 
 import styles from "./App.module.scss";
+
 
 
 const Layout = () => {
@@ -48,11 +49,12 @@ const Layout = () => {
             <div className={styles.shadow}/>
             {!isSearch && !isSetting && <Daily blockHeight={blockHeight} dailyData={dailyData} loading={loading}/>}
             {isSearch && <SearchCity setIsSearch={setIsSearch}/>}
-            {isSetting && <Settings
-                setIsSetting={setIsSetting}
-                setSettingsData={setSettingsData}
-                settingsData={settingsData}
-            />}
+            {/*{isSetting && <Settings*/}
+            {/*    setIsSetting={setIsSetting}*/}
+            {/*    setSettingsData={setSettingsData}*/}
+            {/*    settingsData={settingsData}*/}
+            {/*/>}*/}
+            {isSetting && <GoogleMap setIsSetting={setIsSetting}/>}
             <AllInformation
                 forecastData={forecastData}
                 weatherDetails={weatherDetails}
