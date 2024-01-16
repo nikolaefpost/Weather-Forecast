@@ -9,7 +9,10 @@ export const getCityName = async (lat, lon, dispatch) => {
         console.log(data)
 
         if (data.results && data.results.length > 0) {
-            const city = data.results[0].components.city? data.results[0].components.city: data.results[0].components.town + ", " + data.results[0].components['ISO_3166-1_alpha-2'];
+
+            const cityName = data.results[0].components.city? data.results[0].components.city: data.results[0].components.town
+
+            const city = cityName + ", " + data.results[0].components['ISO_3166-1_alpha-2'];
             localStorage.setItem("current", JSON.stringify({
                 locationString: city,
                 lat,

@@ -1,4 +1,4 @@
-import  {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
     APIProvider,
     Map,
@@ -16,16 +16,15 @@ import PropTypes from "prop-types";
 
 const GoogleMap = ({setIsSetting}) => {
     const dispatch = useDispatch();
-    const { latitude, longitude} = useSelector((state) => state.location);
-    const initialPosition = (latitude && longitude)?
-        { lat: latitude, lng: longitude }:
-        { lat: 0, lng: 0 };
+    const {latitude, longitude} = useSelector((state) => state.location);
+    const initialPosition = (latitude && longitude) ?
+        {lat: latitude, lng: longitude} :
+        {lat: 0, lng: 0};
 
     const [markerPosition, setMarkerPosition] = useState(initialPosition);
-    console.log(markerPosition)
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [infoStatus, setInfoStatus] = useState("Loading")
+    const [infoStatus, setInfoStatus] = useState("Loading");
 
     const handleMarkerClick = () => {
         setOpen(true);
@@ -57,7 +56,7 @@ const GoogleMap = ({setIsSetting}) => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    setMarkerPosition({ lat: position.coords.latitude, lng: position.coords.longitude });
+                    setMarkerPosition({lat: position.coords.latitude, lng: position.coords.longitude});
                 },
                 (error) => {
                     setInfoStatus(error.message);
@@ -70,12 +69,18 @@ const GoogleMap = ({setIsSetting}) => {
 
     }, []);
 
+
+
+
     return (
         <APIProvider apiKey={import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY}>
             <div className={styles.map}>
-                {loading? <p>{infoStatus}</p>: <Map
+                {loading ? <p>{infoStatus}</p> : <Map
                     zoom={5}
                     center={markerPosition}
+                    streetViewControl={false}
+                    zoomControl={false}
+                    mapTypeControl={false}
                     mapId={import.meta.env.VITE_APP_GOOGLE_MAP_ID}
                     onClick={handleMapClick}
                 >
