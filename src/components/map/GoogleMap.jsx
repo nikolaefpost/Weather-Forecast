@@ -6,12 +6,12 @@ import {
     Pin,
     InfoWindow
 } from "@vis.gl/react-google-maps";
-
-import styles from "./map.module.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {getLocationSuccess} from "../../features/location/locationSlice.js";
 import {getCityName} from "../../api/getCityName.js";
 import PropTypes from "prop-types";
+
+import styles from "./map.module.scss";
 
 
 const GoogleMap = ({setIsSetting}) => {

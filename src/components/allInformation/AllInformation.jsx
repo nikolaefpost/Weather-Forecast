@@ -21,9 +21,10 @@ const AllInformation = ({
                             handleTouchMove,
                             weatherDetails,
                             detailsOn,
-                            onHandleSearch,
+                            onHandleSearchToggle,
                             onHandleSettingToggle,
-                            settingsData
+                            settingsData,
+                            onHandleMapSearch
                         }) => {
     const {
         uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity, dewPoint, visibility,
@@ -60,7 +61,12 @@ const AllInformation = ({
             <SegmentedControl handleMouseDown={handleTouchMove}/>
             <div className={styles.all_information_wrap} style={{paddingBottom: detailsOn ? "50px" : "0"}}>
                 <Forecast forecastData={forecastData} isWeekly={isWeekly} setMode={setMode}/>
-                {(height < 350) && <TabBar onHandleSearch={onHandleSearch} onHandleSettingToggle={onHandleSettingToggle}/>}
+                {(height < 350) && <TabBar
+                    onHandleSearchToggle={onHandleSearchToggle}
+                    onHandleSettingToggle={onHandleSettingToggle}
+                    onHandleMapSearch={onHandleMapSearch}
+
+                />}
                 {(height > 350) && <div className={styles.weather_details}>
                     {settingsData.uvi && <Uvi uv={uv}/>}
                     {settingsData.sunrise && <Sunrise sunrise={sunrise} sunset={sunset}/>}
@@ -102,8 +108,9 @@ AllInformation.propTypes = {
     handleTouchMove: PropTypes.func.isRequired,
     height: PropTypes.number.isRequired,
     weatherDetails: PropTypes.object.isRequired,
-    onHandleSearch: PropTypes.func.isRequired,
+    onHandleSearchToggle: PropTypes.func.isRequired,
     onHandleSettingToggle: PropTypes.func.isRequired,
+    onHandleMapSearch: PropTypes.func.isRequired,
     settingsData: PropTypes.object.isRequired,
 
 };

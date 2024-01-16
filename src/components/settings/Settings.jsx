@@ -37,7 +37,7 @@ const Settings = ({setIsSetting, setSettingsData, settingsData}) => {
 Settings.propTypes = {
     setIsSetting: PropTypes.func.isRequired,
     setSettingsData: PropTypes.func.isRequired,
-    settingsData: PropTypes.func.isRequired
+    settingsData: PropTypes.object.isRequired
 };
 
 export default Settings;
