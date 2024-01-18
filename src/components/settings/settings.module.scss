@@ -38,11 +38,11 @@
 
 
 
-    & span {
+    & span, legend {
       @include fonts(400, 17px, 22px, $label-dark-secondary);
     }
 
-    & div{
+    & .check_in{
       width: 18px;
       height: 18px;
       border: 1px solid $label-dark-secondary;
@@ -54,6 +54,21 @@
         right: -4px;
         top: -4px;
         height: 23px;
+      }
+    }
+
+    & .radio{
+      //width: 60px;
+      @include fonts(400, 17px, 22px, $label-dark-secondary);
+
+
+      & input{
+        background: red!important;
+      }
+
+      & label{
+        margin-left: 8px;
+        @include fonts(400, 17px, 22px, $label-dark-secondary);
       }
     }
   }

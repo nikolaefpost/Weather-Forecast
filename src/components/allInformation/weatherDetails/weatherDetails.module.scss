@@ -9,11 +9,13 @@
   padding: 16px;
   background: linear-gradient(to right, #291c44, #341f5a);
   flex-shrink: 2;
+  @include display-flex(space-between, flex-start);
+  flex-direction: column;
 
   & .label{
     @include display-flex(flex-start);
     gap: 6px;
-    white-space: nowrap;
+    //white-space: nowrap;
 
     & img{
       width: 18px;

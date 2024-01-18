@@ -10,6 +10,7 @@ import {toCelsius} from "../../helpers/index.js";
 import Pressure from "./weatherDetails/Pressure.jsx";
 
 import styles from "./allInformation.module.scss";
+import {useLanguage} from "../../context/index.js";
 
 
 
@@ -26,6 +27,7 @@ const AllInformation = ({
                             settingsData,
                             onHandleMapSearch
                         }) => {
+    const {text} = useLanguage();
     const {
         uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity, dewPoint, visibility,
         pressure
@@ -36,8 +38,8 @@ const AllInformation = ({
 
     const feelsLikeStr = `${toCelsius(feelsLike)}°`
     const humidityStr = `${humidity}%`;
-    const humidityDesc = `The dew point is ${toCelsius(dewPoint)}° right now`;
-    const visibilityStr = `${visibility / 1000} km`
+    const humidityDesc = `${text.dew_point} ${toCelsius(dewPoint)}° ${text.right_now}`;
+    const visibilityStr = `${visibility / 1000} ${text.km}`
 
 
     const setMode = () => {
@@ -68,29 +70,29 @@ const AllInformation = ({
 
                 />}
                 {(height > 350) && <div className={styles.weather_details}>
-                    {settingsData.uvi && <Uvi uv={uv}/>}
-                    {settingsData.sunrise && <Sunrise sunrise={sunrise} sunset={sunset}/>}
-                    {settingsData.wind && <Wind windDeg={windDeg} windSpeed={windSpeed}/>}
+                    {settingsData.uvi.value && <Uvi uv={uv}/>}
+                    {settingsData.sunrise.value && <Sunrise sunrise={sunrise} sunset={sunset}/>}
+                    {settingsData.wind.value && <Wind windDeg={windDeg} windSpeed={windSpeed}/>}
                     {rain && <RainSnow value={rain} title="rainfall"/>}
                     {snow && <RainSnow value={snow} title="snowfall"/>}
-                    {settingsData.feelsLike && <Universal
+                    {settingsData.feelsLike.value && <Universal
                         value={feelsLikeStr}
-                        title="feels like"
-                        description="Similar to the actual temperature"
+                        title={text.feels_like}
+                        description={text.similar_actual_temperature}
                         icon={feels_like}
                     />}
-                    {settingsData.humidity && <Universal
+                    {settingsData.humidity.value && <Universal
                         value={humidityStr}
-                        title="humidity"
+                        title={text.humidity}
                         description={humidityDesc}
                         icon={humidityIcon}
                     />}
-                    {settingsData.visibility && <Universal
+                    {settingsData.visibility.value && <Universal
                         value={visibilityStr}
-                        title="visibility"
+                        title={text.visibility}
                         icon={visibilityIcon}
                     />}
-                    {settingsData.pressure && <Pressure value={pressure}/>}
+                    {settingsData.pressure.value && <Pressure value={pressure}/>}
 
                 </div>}
                 {/*{(height > 350) && <LocationComponent/>}*/}

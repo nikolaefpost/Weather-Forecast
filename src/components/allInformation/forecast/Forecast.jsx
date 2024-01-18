@@ -4,16 +4,18 @@ import PropTypes from "prop-types";
 import cn from "classnames";
 
 import styles from "../allInformation.module.scss"
+import {useLanguage} from "../../../context/index.js";
 
 
 
 const Forecast = ({forecastData, isWeekly, setMode}) => {
+    const {text} = useLanguage();
     return (
         <>
             <div className={styles.forecast}>
                 <div className={styles.control}>
-                    <button onClick={setMode}>Hourly Forecast</button>
-                    <button onClick={setMode}>Weekly Forecast</button>
+                    <button onClick={setMode}>{text.hourly_forecast}</button>
+                    <button onClick={setMode}>{text.weekly_forecast}</button>
                     <div className={styles.separator_down}/>
                     <div className={cn(styles.underline, {[styles.underline_weekly]: isWeekly})}/>
                 </div>

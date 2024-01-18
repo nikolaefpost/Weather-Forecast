@@ -40,18 +40,18 @@ const monthData =["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "1
 
 // const uvIndex = ["Low", "Low", "Low", "Moderate", "Moderate", "Moderate", "High", "High", "Very high", "Very high", "Very high", "Extreme"];
 
-const uvIndex = (uvi) => {
+const uvIndex = (uvi, lang) => {
   switch (true) {
     case uvi <= 2:
-      return "Low";
+      return lang === "en"? "Low":"Низький";
     case uvi <= 5:
-      return "Moderate";
+      return lang === "en"? "Moderate": "Помірний";
     case uvi <= 7:
-      return "High";
+      return lang === "en"? "High": "Високий";
     case uvi <= 10:
-      return "Very high";
+      return lang === "en"? "Very high": "Дуже високий";
     default:
-      return "Extreme";
+      return lang === "en"? "Extreme": "Екстрім";
   }
 };
 
