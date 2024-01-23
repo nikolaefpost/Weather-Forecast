@@ -5,15 +5,15 @@ import PropTypes from "prop-types";
 import {useSelector, useDispatch} from "react-redux";
 import { getLocationStart, getLocationSuccess, getLocationFailure, setCity } from '../features/location/locationSlice.js';
 import { setWeatherData } from '../features/weather/weatherSlice.js'
+import {useLanguage} from "../context/index.js";
 
 
 const useApiPromptRequests = (prompt) => {
     const dispatch = useDispatch();
+
     const [error, setError] = useState(null);
-    console.log(prompt)
     // Fetch location and weather data from API.
     useEffect(() => {
-        console.log(prompt)
         const fetchData = async () => {
             if (!prompt) return; // return if prompt is null or undefined
             dispatch(getLocationStart());
@@ -47,6 +47,7 @@ const useApiPromptRequests = (prompt) => {
 
 const useApiWeather = () => {
     const dispatch = useDispatch();
+    const {lang} = useLanguage();
 
     const current = JSON.parse(localStorage.getItem('current'));
 
@@ -65,7 +66,7 @@ const useApiWeather = () => {
 
             try {
                 // Dispatch the asynchronous action
-                await dispatch(setWeatherData(latitude, longitude));
+                await dispatch(setWeatherData(latitude, longitude, lang));
             } catch (error) {
                 setError(error);
                 console.error("Error:", error);
@@ -73,7 +74,7 @@ const useApiWeather = () => {
         };
 
         fetchData();
-    }, [city, latitude, longitude]); // run effect when `prompt` changes
+    }, [city, latitude, longitude, lang, dispatch]); // run effect when `prompt` changes
 
     return {
         error,

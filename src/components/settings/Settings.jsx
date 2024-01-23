@@ -8,7 +8,6 @@ import styles from "./settings.module.scss";
 
 
 const Settings = ({setIsSetting, setSettingsData, settingsData}) => {
-    console.log(Object.entries(settingsData))
     const {text, lang, onChangeLang} = useLanguage();
     const languages = [
         {

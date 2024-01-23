@@ -5,10 +5,11 @@ import fetchDataPrompt from "../../api/fetchDataPrompt.js";
 import {useDispatch} from "react-redux";
 
 import styles from './serchCity.module.scss'
+import {useLanguage} from "../../context/index.js";
 
 const SearchCity = ({setIsSearch}) => {
     const dispatch = useDispatch();
-    // const [prompt, setPrompt] = useState("");
+    const {text, lang} = useLanguage();
     const [value, setValue] = useState("")
 
     const handlerPromptValue = (e) => {
@@ -17,8 +18,7 @@ const SearchCity = ({setIsSearch}) => {
     // const {error: errorPromt} = useApiPromptRequests(prompt);
     const handleSubmit = (e) => {
       e.preventDefault()
-        console.log(value)
-        fetchDataPrompt(value, dispatch)
+        fetchDataPrompt(value,lang, dispatch)
         setIsSearch(false)
     }
 
@@ -26,7 +26,7 @@ const SearchCity = ({setIsSearch}) => {
         <div className={styles.search}>
             <button onClick={()=>setIsSearch(false)}>
                 <span>&#8249;</span>
-                <span>Weather</span>
+                <span>{text.weather}</span>
             </button>
             <form onSubmit={handleSubmit} className={styles.inputBlock}>
                 <button type="submit" ><img alt="search" src={searchIcon}/></button>
@@ -35,7 +35,7 @@ const SearchCity = ({setIsSearch}) => {
                     type="text"
                     value={value}
                     onChange={handlerPromptValue}
-                    placeholder=" Search for a city or airport"
+                    placeholder={text.search_city}
                 />
             </form>
 

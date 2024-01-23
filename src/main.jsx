@@ -1,12 +1,14 @@
-
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import index from './store';
 import './index.scss'
+import {LanguageProvider} from "./context/lanuage.jsx";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <Provider store={index}>
-        <App />
-    </Provider>,
+    <LanguageProvider>
+        <Provider store={index}>
+            <App/>
+        </Provider>
+    </LanguageProvider>,
 )

@@ -1,10 +1,11 @@
 import {setCity} from "../features/location/locationSlice.js";
 
-export const getCityName = async (lat, lon, dispatch) => {
+export const getCityName = async (lat, lon, lang, dispatch) => {
 
+    const language = lang === 'en'? lang: "uk";
     try {
-        const language = 'en';
         const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${import.meta.env.VITE_GEO}&language=${language}`);
+
         const data = await response.json();
         console.log(data)
 

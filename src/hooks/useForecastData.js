@@ -1,11 +1,16 @@
 import {useEffect, useState} from "react";
-import {monthData, toCelsius, weekData} from "../helpers/index.js";
+import {monthData, toCelsius} from "../helpers/index.js";
+import {useLanguage} from "../context/index.js";
 
 const useForecastData = (weatherData, locationString, isWeekly) => {
+    const {lang} = useLanguage();
+    const weekData = lang === "en" ?
+        ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"]:
+        ["Нед", "Пон", "Вівт", "Сер", "Четв", "П'ятн", "Суб"];
 
     const [forecastData, setForecastData] = useState([]);
     const [dailyData, setDailyData] = useState({
-        locationString: "введите город",
+        locationString: lang === "en" ? "enter city" : "введите город",
         temp: 273,
         description: "--",
         minTemp: 273,
@@ -16,7 +21,6 @@ const useForecastData = (weatherData, locationString, isWeekly) => {
 
     useEffect(() => {
         if (!weatherData?.daily) return;
-        console.log(weatherData)
 
         setDailyData({
             locationString: locationString,
@@ -71,7 +75,7 @@ const useForecastData = (weatherData, locationString, isWeekly) => {
             }
         })
         setForecastData(isWeekly? weekly: hourly);
-    }, [weatherData, locationString, isWeekly]);
+    }, [weatherData, locationString, isWeekly, lang]);
 
     return [dailyData, forecastData, weatherDetails];
 

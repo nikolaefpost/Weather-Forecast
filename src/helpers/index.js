@@ -1,7 +1,8 @@
 import {clear_sky_day, clear_sky_night, few_clouds_day, few_clouds_night, broken_clouds,
   shower_rain, rain_day, rain_night, thunderstorm_day, thunderstorm_night, snow_night, snow_day, mist} from "../assets/image/cloud/index.js";
 
-const k = 273.15
+const k = 273.15;
+
 const toCelsius = (kelvin) => {
   if (isNaN(parseFloat(kelvin))) return kelvin
   return Math.round(parseFloat(kelvin) - k)

@@ -12,10 +12,12 @@ import {getCityName} from "../../api/getCityName.js";
 import PropTypes from "prop-types";
 
 import styles from "./map.module.scss";
+import {useLanguage} from "../../context/index.js";
 
 
 const GoogleMap = ({setIsSetting}) => {
     const dispatch = useDispatch();
+    const { lang} = useLanguage();
     const {latitude, longitude} = useSelector((state) => state.location);
     const initialPosition = (latitude && longitude) ?
         {lat: latitude, lng: longitude} :
@@ -47,7 +49,7 @@ const GoogleMap = ({setIsSetting}) => {
             latitude: markerPosition.lat,
             longitude: markerPosition.lng
         }));
-        getCityName(markerPosition.lat, markerPosition.lng, dispatch);
+        getCityName(markerPosition.lat, markerPosition.lng, lang, dispatch);
         setIsSetting(false);
     }
 

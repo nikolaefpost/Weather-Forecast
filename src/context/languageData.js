@@ -17,6 +17,8 @@ export const data = {
         mmHg: "mmHg",
         setting: "Setting",
         select_language: "Select language",
+        weather: "Weather",
+        search_city: "Search for a city",
     },
     ua: {
         hourly_forecast: "Погодинний прогноз",
@@ -36,5 +38,7 @@ export const data = {
         mmHg: "мм рт.ст",
         setting: "Налаштування",
         select_language: "Оберіть мову",
+        weather: "Погода",
+        search_city: "Пошук міста",
     }
 }

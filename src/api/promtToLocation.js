@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 
-const promptToLocation = (prompt) => {
+const promptToLocation = (prompt, lang) => {
+
+    const language = lang === "en" ? "in English" : "in Ukrainian";
 
     const promptData = JSON.parse(localStorage.getItem(prompt));
     if (promptData?.locationString)  return promptData;
@@ -13,7 +15,7 @@ const promptToLocation = (prompt) => {
         functions: [
             {
                 name: "displayData",
-                description: "do not answer any questions in the request; your task is to determine the name of the locality and provide data according to the template",
+                description: `do not answer any questions in the request; your task is to determine the name of the locality and provide data according to the template ${language}`,
                 parameters: {
                     type: "object",
                     properties: {

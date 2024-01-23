@@ -3,11 +3,11 @@ import promptToLocation from "./promtToLocation.js";
 import locationToCoordinates from "./locationToCoordinates.js";
 
 
-const fetchDataPrompt = async (prompt, dispatch) => {
+const fetchDataPrompt = async (prompt, lang, dispatch) => {
     if (!prompt) return; // return if prompt is null or undefined
     dispatch(getLocationStart());
     try {
-        const promptDataRes = await promptToLocation(prompt);
+        const promptDataRes = await promptToLocation(prompt, lang);
         dispatch(setCity(promptDataRes.locationString));
 
         const locationDataRes = await locationToCoordinates(
