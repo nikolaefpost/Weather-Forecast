@@ -20,7 +20,7 @@ const useSetting = () => {
     // }, []);
 
     useEffect(() => {
-        const settingsDataStorage = JSON.parse(localStorage.getItem("settingss"));
+        const settingsDataStorage = JSON.parse(localStorage.getItem("settings"));
         if (settingsDataStorage) setSettingsData(settingsDataStorage);
         else setSettingsData({
             uvi: {value: true, label: text.uv_index},

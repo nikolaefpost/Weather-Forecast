@@ -2,9 +2,9 @@
 @import "../../styles/colors";
 
 .settings{
-  margin-top: -68px;
+  margin-top: -86px;
   position: relative;
-  z-index: 2;
+  z-index: 3;
   padding: 0 66px;
   @include display-flex(stretch, flex-start);
   //justify-content: stretch;
