@@ -60,7 +60,7 @@ const Layout = () => {
     return (
         <div
             className={styles.content}
-            style={{paddingTop: (blockHeight > 350)?"32px" : "98px"}}
+            style={{paddingTop: (blockHeight > 350)?"16px" : "98px"}}
         >
             <div className={styles.house}/>
             <div className={styles.shadow}/>
