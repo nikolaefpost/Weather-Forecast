@@ -17,7 +17,7 @@ import {useLanguage} from "../../context/index.js";
 
 const GoogleMap = ({setIsSetting}) => {
     const dispatch = useDispatch();
-    const { lang} = useLanguage();
+    const { lang, text} = useLanguage();
     const {latitude, longitude} = useSelector((state) => state.location);
     const initialPosition = (latitude && longitude) ?
         {lat: latitude, lng: longitude} :
@@ -108,7 +108,7 @@ const GoogleMap = ({setIsSetting}) => {
                         </div>
                     </InfoWindow>
                 </Map>}
-                <button onClick={handleAddNewPlace}>add this place</button>
+                <button onClick={handleAddNewPlace}>{text.add_place}</button>
             </div>
         </APIProvider>
     );

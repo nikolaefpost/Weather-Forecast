@@ -19,6 +19,7 @@ export const data = {
         select_language: "Select language",
         weather: "Weather",
         search_city: "Search for a city",
+        add_place: "add this place",
     },
     ua: {
         hourly_forecast: "Погодинний прогноз",
@@ -40,5 +41,6 @@ export const data = {
         select_language: "Оберіть мову",
         weather: "Погода",
         search_city: "Пошук міста",
+        add_place: "добавить это место",
     }
 }
