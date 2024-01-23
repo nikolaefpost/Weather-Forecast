@@ -44,8 +44,8 @@ const Layout = () => {
     const handleTouchMove = (e) => {
         if (isSetting) setIsSetting(false);
         let newHeight = screenHeight - e.touches[0].clientY; // Adjust sensitivity as needed
-        if (newHeight > screenHeight-200){
-            newHeight = screenHeight-200;
+        if (newHeight > screenHeight-250){
+            newHeight = screenHeight-250;
             setDetailsOn(true)
         }else {
             setDetailsOn(false)
