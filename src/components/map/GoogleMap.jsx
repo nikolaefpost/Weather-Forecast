@@ -6,7 +6,7 @@ import {
     Pin,
     InfoWindow
 } from "@vis.gl/react-google-maps";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {getLocationSuccess} from "../../features/location/locationSlice.js";
 import {getCityName} from "../../api/getCityName.js";
 import PropTypes from "prop-types";
@@ -18,13 +18,10 @@ import {useLanguage} from "../../context/index.js";
 const GoogleMap = ({setIsSetting}) => {
     const dispatch = useDispatch();
     const { lang, text} = useLanguage();
-    const {latitude, longitude} = useSelector((state) => state.location);
-    const initialPosition = (latitude && longitude) ?
-        {lat: latitude, lng: longitude} :
-        {lat: 0, lng: 0};
 
-    const [markerPosition, setMarkerPosition] = useState(initialPosition);
+    const [markerPosition, setMarkerPosition] = useState({lat: 0, lng: 0});
     const [open, setOpen] = useState(false);
+    console.log(open)
     const [loading, setLoading] = useState(true);
     const [infoStatus, setInfoStatus] = useState("Loading");
 
@@ -41,6 +38,15 @@ const GoogleMap = ({setIsSetting}) => {
 
             // Close the InfoWindow when the map is clicked
             setOpen(false);
+
+            setTimeout(()=>{
+                dispatch(getLocationSuccess({
+                    latitude: event.detail.latLng.lat,
+                    longitude: event.detail.latLng.lng
+                }));
+                getCityName(event.detail.latLng.lat, event.detail.latLng.lng, lang, dispatch);
+                setIsSetting(false);
+            },2000)
         }
     };
 
@@ -101,7 +107,7 @@ const GoogleMap = ({setIsSetting}) => {
                         isVisible={open}
                     >
                         {/* Content of the InfoWindow */}
-                        <div>
+                        <div >
                             <h3>Marker Information</h3>
                             <p>Latitude: {markerPosition.lat}</p>
                             <p>Longitude: {markerPosition.lng}</p>
