@@ -17,11 +17,11 @@ import {useLanguage} from "../../context/index.js";
 
 const GoogleMap = ({setIsSetting}) => {
     const dispatch = useDispatch();
-    const { lang, text} = useLanguage();
+    const { lang } = useLanguage();
 
     const [markerPosition, setMarkerPosition] = useState({lat: 0, lng: 0});
+    const [centerPosition, setCenterPosition] = useState({lat: 0, lng: 0});
     const [open, setOpen] = useState(false);
-    console.log(open)
     const [loading, setLoading] = useState(true);
     const [infoStatus, setInfoStatus] = useState("Loading");
 
@@ -50,21 +50,21 @@ const GoogleMap = ({setIsSetting}) => {
         }
     };
 
-    const handleAddNewPlace = () => {
-        dispatch(getLocationSuccess({
-            latitude: markerPosition.lat,
-            longitude: markerPosition.lng
-        }));
-        getCityName(markerPosition.lat, markerPosition.lng, lang, dispatch);
-        setIsSetting(false);
-    }
+    // const handleAddNewPlace = () => {
+    //     dispatch(getLocationSuccess({
+    //         latitude: markerPosition.lat,
+    //         longitude: markerPosition.lng
+    //     }));
+    //     getCityName(markerPosition.lat, markerPosition.lng, lang, dispatch);
+    //     setIsSetting(false);
+    // }
 
     useEffect(() => {
-        // setLoading(true);
+        setLoading(true);
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    setMarkerPosition({lat: position.coords.latitude, lng: position.coords.longitude});
+                    setCenterPosition({lat: position.coords.latitude, lng: position.coords.longitude});
                 },
                 (error) => {
                     setInfoStatus(error.message);
@@ -85,7 +85,7 @@ const GoogleMap = ({setIsSetting}) => {
             <div className={styles.map}>
                 {loading ? <p>{infoStatus}</p> : <Map
                     zoom={5}
-                    center={markerPosition}
+                    center={centerPosition}
                     streetViewControl={false}
                     zoomControl={false}
                     mapTypeControl={false}
@@ -114,7 +114,7 @@ const GoogleMap = ({setIsSetting}) => {
                         </div>
                     </InfoWindow>
                 </Map>}
-                <button onClick={handleAddNewPlace}>{text.add_place}</button>
+                {/*{markerPosition.lat !== 0 && <button onClick={handleAddNewPlace}>{text.add_place}</button>}*/}
             </div>
         </APIProvider>
     );
