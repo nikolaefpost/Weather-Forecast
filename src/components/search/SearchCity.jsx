@@ -21,7 +21,8 @@ const SearchCity = ({ setIsSearch }) => {
         const fetchCityData = async () => {
             try {
                 const response = await fetch(
-                    `http://api.geonames.org/searchJSON?q=${inputValue}&lang=${lang}&username=weather_forecast`
+                    `https://secure.geonames.org/searchJSON?q=${inputValue}&lang=${lang}&username=weather_forecast`
+
                 );
 
                 if (!response.ok) {
