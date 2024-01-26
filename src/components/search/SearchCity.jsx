@@ -80,7 +80,7 @@ const SearchCity = ({ setIsSearch }) => {
                     onChange={(e) => setInputValue(e.target.value)}
                     placeholder={text.search_city}
                 />
-                <span>{error} : { filteredCities.length}</span>
+                {error && <span className={styles.error}>error :{error}</span>}
                 {filteredCities.length > 0 && (
                     <ul className={styles.dropdown}>
                         {filteredCities.map(city => (
