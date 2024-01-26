@@ -76,6 +76,7 @@ const SearchCity = ({ setIsSearch }) => {
                     onChange={(e) => setInputValue(e.target.value)}
                     placeholder={text.search_city}
                 />
+                <span>filteredCities.length: { filteredCities.length}</span>
                 {filteredCities.length > 0 && (
                     <ul className={styles.dropdown}>
                         {filteredCities.map(city => (
