@@ -10,9 +10,9 @@ import {useDispatch} from "react-redux";
 import {getLocationSuccess} from "../../features/location/locationSlice.js";
 import {getCityName} from "../../api/getCityName.js";
 import PropTypes from "prop-types";
+import {useLanguage} from "../../context/index.js";
 
 import styles from "./map.module.scss";
-import {useLanguage} from "../../context/index.js";
 
 
 const GoogleMap = ({setIsSetting}) => {

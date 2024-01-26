@@ -2,12 +2,14 @@
 @import "../../styles/colors";
 
 .search {
+  margin-top: -70px;
   position: relative;
   z-index: 2;
   padding: 0 66px;
   @include display-flex(flex-start, flex-start);
   gap: 8px;
   flex-direction: column;
+  //overflow-y: hidden;
 
   & button {
     @include display-flex(flex-start);
@@ -26,11 +28,13 @@
   }
 
   .inputBlock {
+
     position: relative;
     padding: 7px 8px 7px 32px;
     border-radius: 10px;
     background: linear-gradient(168deg, rgba(46, 51, 90, 0.26) 1.62%, rgba(28, 27, 51, 0.26) 95.72%);
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25) inset;
+
 
     & img{
       position: absolute;
@@ -45,6 +49,17 @@
       border: none;
       outline: none;
       @include fonts(400, 17px, 22px, $label-dark-secondary);
+    }
+
+    & .dropdown{
+      max-height: calc(100vh - 472px);
+      overflow-y: auto;
+      padding-top: 4px;
+
+      & li{
+        @include fonts(400, 17px, 22px, $label-dark-secondary);
+      }
+
     }
   }
 }
