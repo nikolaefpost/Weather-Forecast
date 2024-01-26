@@ -25,7 +25,7 @@ const SearchCity = ({ setIsSearch }) => {
                 );
 
                 if (!response.ok) {
-                    setError('Failed to fetch city data from GeoNames')
+                    setError('! Failed to fetch city data from GeoNames')
                     throw new Error('Failed to fetch city data from GeoNames');
                 }
 
