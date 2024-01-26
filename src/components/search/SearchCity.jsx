@@ -12,6 +12,7 @@ const SearchCity = ({ setIsSearch }) => {
     const { text, lang } = useLanguage();
     const [inputValue, setInputValue] = useState("");
     const [filteredCities, setFilteredCities] = useState([]);
+    const [error, setError] = useState('')
 
     console.log(inputValue)
 
@@ -24,6 +25,7 @@ const SearchCity = ({ setIsSearch }) => {
                 );
 
                 if (!response.ok) {
+                    setError('Failed to fetch city data from GeoNames')
                     throw new Error('Failed to fetch city data from GeoNames');
                 }
 
@@ -38,6 +40,7 @@ const SearchCity = ({ setIsSearch }) => {
 
                 setFilteredCities(cities);
             } catch (error) {
+                setError(error.message)
                 console.error('Error fetching city data:', error.message);
             }
         };
@@ -76,7 +79,7 @@ const SearchCity = ({ setIsSearch }) => {
                     onChange={(e) => setInputValue(e.target.value)}
                     placeholder={text.search_city}
                 />
-                <span>filteredCities.length: { filteredCities.length}</span>
+                <span>{error} : { filteredCities.length}</span>
                 {filteredCities.length > 0 && (
                     <ul className={styles.dropdown}>
                         {filteredCities.map(city => (
