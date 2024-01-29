@@ -10,18 +10,19 @@ import { useLanguage } from "../../context/index.js";
 const SearchCity = ({ setIsSearch }) => {
     const dispatch = useDispatch();
     const { text, lang } = useLanguage();
+    const language = lang === "en"? lang: "ru"
     const [inputValue, setInputValue] = useState("");
     const [filteredCities, setFilteredCities] = useState([]);
     const [error, setError] = useState('')
 
-    console.log(inputValue)
+    // console.log(inputValue)
 
     useEffect(() => {
         // Fetch city data from GeoNames when the component mounts
         const fetchCityData = async () => {
             try {
                 const response = await fetch(
-                    `https://secure.geonames.org/searchJSON?q=${inputValue}&lang=${lang}&username=weather_forecast`
+                    `https://secure.geonames.org/searchJSON?q=${inputValue}&lang=${language}&username=weather_forecast`
 
                 );
 
@@ -52,16 +53,24 @@ const SearchCity = ({ setIsSearch }) => {
         } else {
             setFilteredCities([]); // Clear the list if inputValue is empty
         }
-    }, [inputValue, lang]);
+    }, [inputValue, language]);
 
-    const handleSelectCity = (selectedCity) => {
-        setInputValue(selectedCity.name);
-        setFilteredCities([]);
-    }
+    // const handleSelectCity = (selectedCity) => {
+    //     setInputValue(selectedCity.name);
+    //     setFilteredCities([]);
+    // }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         fetchDataPrompt(inputValue, lang, dispatch);
+        setIsSearch(false);
+    }
+
+    const handleListItemSubmit = (city, e ) => {
+
+        const stringCity = `${city.name}, ${city.country}`
+        e.preventDefault();
+        fetchDataPrompt(stringCity, lang, dispatch);
         setIsSearch(false);
     }
 
@@ -83,8 +92,8 @@ const SearchCity = ({ setIsSearch }) => {
                 {error && <span className={styles.error}>error :{error}</span>}
                 {filteredCities.length > 0 && (
                     <ul className={styles.dropdown}>
-                        {filteredCities.map(city => (
-                            <li key={city.name} onClick={() => handleSelectCity(city)}>
+                        {filteredCities.map((city, i) => (
+                            <li key={i} onClick={(e) => handleListItemSubmit(city, e)}>
                                 {`${city.name}, ${city.country}`}
                             </li>
                         ))}

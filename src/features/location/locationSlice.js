@@ -20,7 +20,7 @@ const locationSlice = createSlice({
         },
         getLocationFailure: (state, action) => {
             state.loading = false;
-            state.error = action.payload;
+            state.error = action.payload.message || JSON.stringify(action.payload);
         },
         setCity: (state, action) => {
             state.city = action.payload;

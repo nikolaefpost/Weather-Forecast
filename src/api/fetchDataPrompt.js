@@ -4,6 +4,7 @@ import locationToCoordinates from "./locationToCoordinates.js";
 
 
 const fetchDataPrompt = async (prompt, lang, dispatch) => {
+    console.log(prompt)
     if (!prompt) return; // return if prompt is null or undefined
     dispatch(getLocationStart());
     try {
