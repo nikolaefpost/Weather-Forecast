@@ -5,7 +5,7 @@
   height: 100vh;
   background: radial-gradient(73.19% 111.55% at 93.07% 74.31%, $background-color_one 0%, $background-color_two 100%);
   @include fonts(500, 14px, 20px, black);
-  //padding-bottom: 0px;
+  padding-bottom: 10px;
   //padding: 20px;
 
   & .content {
