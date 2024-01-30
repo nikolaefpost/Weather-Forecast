@@ -1,0 +1,30 @@
+@import "../../styles/mixins";
+@import "../../styles/colors";
+
+.error {
+  position: relative;
+  z-index: 2;
+  padding: 0 66px;
+  @include display-flex;
+  flex-direction: column;
+
+  & p{
+    @include fonts(400, 17px, 22px, red);
+    text-align: center;
+  }
+
+  & button{
+    margin-top: 50px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    background: rgba(72, 49, 157, 0.20);
+    box-shadow: 5px 4px 10px 0 rgba(0, 0, 0, 0.25), 1px 1px 0 0 rgba(255, 255, 255, 0.25) inset;
+    @include fonts(400, 20px, 24px, $label-dark-primary);
+
+    &:hover{
+      border: 1px solid rgba(255, 255, 255, 0.50);
+      background: #48319D;
+    }
+  }
+}

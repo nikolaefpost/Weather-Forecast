@@ -64,7 +64,7 @@ const Layout = () => {
         >
             <div className={styles.house}/>
             <div className={styles.shadow}/>
-            {!isSearch && !isSetting && <Daily blockHeight={blockHeight} dailyData={dailyData} loading={loading}/>}
+            {!isSearch && !isSetting && <Daily  blockHeight={blockHeight} dailyData={dailyData} loading={loading} error={error}/>}
             {isSearch && <SearchCity setIsSearch={setIsSearch}/>}
             {isSetting && <Settings
                 setIsSetting={setIsSetting}

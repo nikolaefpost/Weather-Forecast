@@ -13,8 +13,12 @@ const locationSlice = createSlice({
         getLocationStart: (state) => {
             state.loading = true;
         },
-        getLocationSuccess: (state, action) => {
+        getLocationEnd: (state) => {
+            console.log("getLocationStart reducer");
             state.loading = false;
+        },
+        getLocationSuccess: (state, action) => {
+            // state.loading = false;
             state.latitude = action.payload.latitude;
             state.longitude = action.payload.longitude;
         },
@@ -22,12 +26,22 @@ const locationSlice = createSlice({
             state.loading = false;
             state.error = action.payload.message || JSON.stringify(action.payload);
         },
+        getResetError: (state) => {
+            state.error = null;
+        },
         setCity: (state, action) => {
             state.city = action.payload;
         },
     },
 });
 
-export const { getLocationStart, getLocationSuccess, getLocationFailure, setCity } = locationSlice.actions;
+export const {
+    getLocationStart,
+    getLocationEnd,
+    getLocationSuccess,
+    getLocationFailure,
+    getResetError,
+    setCity
+} = locationSlice.actions;
 
 export default locationSlice.reducer;

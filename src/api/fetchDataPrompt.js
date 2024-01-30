@@ -1,10 +1,9 @@
-import {getLocationFailure, getLocationStart, getLocationSuccess, setCity} from "../features/location/locationSlice.js";
+import {getLocationFailure, getLocationStart, getLocationEnd, getLocationSuccess, setCity} from "../features/location/locationSlice.js";
 import promptToLocation from "./promtToLocation.js";
 import locationToCoordinates from "./locationToCoordinates.js";
 
 
 const fetchDataPrompt = async (prompt, lang, dispatch) => {
-    console.log(prompt)
     if (!prompt) return; // return if prompt is null or undefined
     dispatch(getLocationStart());
     try {
@@ -14,7 +13,8 @@ const fetchDataPrompt = async (prompt, lang, dispatch) => {
         const locationDataRes = await locationToCoordinates(
             promptDataRes.locationString
         );
-        dispatch(getLocationSuccess({ latitude: locationDataRes.lat, longitude: locationDataRes.lon }));
+        if (locationDataRes) dispatch(getLocationSuccess({ latitude: locationDataRes.lat, longitude: locationDataRes.lon }));
+        dispatch(getLocationEnd());
     } catch (error) {
         // setError(error);
         dispatch(getLocationFailure(error));
