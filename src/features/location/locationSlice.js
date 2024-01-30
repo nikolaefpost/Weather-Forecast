@@ -14,7 +14,6 @@ const locationSlice = createSlice({
             state.loading = true;
         },
         getLocationEnd: (state) => {
-            console.log("getLocationStart reducer");
             state.loading = false;
         },
         getLocationSuccess: (state, action) => {

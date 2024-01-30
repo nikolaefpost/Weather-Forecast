@@ -11,8 +11,7 @@ const getWeatherData = async (latitude, longitude,lang) => {
         );
         return await response.json();
     } catch (error) {
-        console.error("Error:", error);
-        return await Promise.reject("Unable to fetch weather data.");
+        throw "Unable to fetch weather data. Try again";
     }
 };
 

@@ -11,7 +11,7 @@ import Pressure from "./weatherDetails/Pressure.jsx";
 
 import styles from "./allInformation.module.scss";
 import {useLanguage} from "../../context/index.js";
-
+import WeatherDescription from "./weatherDescription/WeatherDescription.jsx";
 
 
 const AllInformation = ({
@@ -32,8 +32,6 @@ const AllInformation = ({
         uv, sunrise, sunset, windDeg, windSpeed, rain, snow, feelsLike, humidity, dewPoint, visibility,
         pressure
     } = weatherDetails;
-
-
 
 
     const feelsLikeStr = `${toCelsius(feelsLike)}°`
@@ -96,6 +94,7 @@ const AllInformation = ({
 
                 </div>}
                 {/*{(height > 350) && <LocationComponent/>}*/}
+                <WeatherDescription/>
             </div>
 
         </div>

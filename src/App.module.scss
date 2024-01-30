@@ -40,4 +40,9 @@
       z-index: 1;
     }
   }
+
+  & .error_wrap{
+    @include display-flex;
+    height: 100vh;
+  }
 }

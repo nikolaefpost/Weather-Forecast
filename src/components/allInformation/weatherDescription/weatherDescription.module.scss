@@ -1,0 +1,11 @@
+@import "../../../styles/mixins";
+@import "../../../styles/colors";
+
+.weatherDescription{
+  margin: 12px 24px;
+  border-radius: 22px;
+  border: 1px solid #FFF;
+  padding: 16px;
+  background: linear-gradient(to right, #291c44, #341f5a);
+  @include fonts(600, 15px, 20px, $label-dark-secondary);
+}

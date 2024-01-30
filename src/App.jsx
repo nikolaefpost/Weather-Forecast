@@ -2,15 +2,16 @@ import Layout from "./Layout.jsx";
 import {useApiWeather} from "./hooks/useApiRequests.js";
 
 import styles from './App.module.scss'
+import Error from "./components/error/Error.jsx";
 
 
 function App() {
 
-    const {error} = useApiWeather();
+    const {error, setError} = useApiWeather();
 
     return (
         <div className={styles.container}>
-            <Layout/>
+            {error ? <div className={styles.error_wrap}><Error errorText={error} handlerError={()=>setError(null)}/></div>: <Layout/>}
         </div>
     )
 }

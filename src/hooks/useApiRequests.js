@@ -3,7 +3,7 @@ import promptToLocation from "../api/promtToLocation.js";
 import locationToCoordinates from "../api/locationToCoordinates.js";
 import PropTypes from "prop-types";
 import {useSelector, useDispatch} from "react-redux";
-import { getLocationStart, getLocationSuccess, getLocationFailure, setCity } from '../features/location/locationSlice.js';
+import { getLocationStart, getLocationSuccess, setCity } from '../features/location/locationSlice.js';
 import { setWeatherData } from '../features/weather/weatherSlice.js'
 import {useLanguage} from "../context/index.js";
 
@@ -27,8 +27,6 @@ const useApiPromptRequests = (prompt) => {
                 dispatch(getLocationSuccess({ latitude: locationDataRes.lat, longitude: locationDataRes.lon }));
             } catch (error) {
                 setError(error);
-                dispatch(getLocationFailure(error));
-                console.error("Error:", error);
             }
         };
 
@@ -69,7 +67,7 @@ const useApiWeather = () => {
                 await dispatch(setWeatherData(latitude, longitude, lang));
             } catch (error) {
                 setError(error);
-                console.error("Error:", error);
+                console.error("Errorggg:", error);
             }
         };
 
@@ -78,6 +76,7 @@ const useApiWeather = () => {
 
     return {
         error,
+        setError
     };
 };
 

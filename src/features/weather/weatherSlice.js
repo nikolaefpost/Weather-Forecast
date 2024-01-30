@@ -4,7 +4,8 @@ import getWeatherData from "../../api/getWeatherData.js";
 const weatherSlice = createSlice({
     name: 'weather',
     initialState: {
-        weatherData: null
+        weatherData: null,
+        errorWeather: null
     },
     reducers: {
         setWeatherDataSuccess: (state, action) => {
@@ -16,13 +17,8 @@ const weatherSlice = createSlice({
 export const { setWeatherDataSuccess } = weatherSlice.actions;
 
 export const setWeatherData = (latitude, longitude, lang) => async (dispatch) => {
-    try {
-        const weatherDataRes = await getWeatherData(latitude, longitude, lang);
-        dispatch(setWeatherDataSuccess(weatherDataRes));
-    } catch (error) {
-        console.error("Error:", error);
-        // Handle error as needed
-    }
+    const weatherDataRes = await getWeatherData(latitude, longitude, lang);
+    dispatch(setWeatherDataSuccess(weatherDataRes));
 };
 
 export default weatherSlice.reducer;
