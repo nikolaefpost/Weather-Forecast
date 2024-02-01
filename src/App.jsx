@@ -6,7 +6,7 @@ import Error from "./components/error/Error.jsx";
 
 
 function App() {
-
+    console.log("APP")
     const {error, setError} = useApiWeather();
 
     return (

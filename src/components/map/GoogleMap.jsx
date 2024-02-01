@@ -6,13 +6,14 @@ import {
     Pin,
     InfoWindow
 } from "@vis.gl/react-google-maps";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getLocationSuccess} from "../../features/location/locationSlice.js";
 import {getCityName} from "../../api/getCityName.js";
 import PropTypes from "prop-types";
 import {useLanguage} from "../../context/index.js";
 
 import styles from "./map.module.scss";
+import {currentLocationIcon} from "../../assets/svgElement";
 
 
 const GoogleMap = ({setIsSetting}) => {
@@ -22,9 +23,9 @@ const GoogleMap = ({setIsSetting}) => {
     const [markerPosition, setMarkerPosition] = useState({lat: 0, lng: 0});
     const [centerPosition, setCenterPosition] = useState({lat: 0, lng: 0});
     const [open, setOpen] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [infoStatus, setInfoStatus] = useState("Loading");
-
+    const { latitude, longitude } = useSelector((state) => state.location);
     const handleMarkerClick = () => {
         setOpen(true);
     };
@@ -58,13 +59,23 @@ const GoogleMap = ({setIsSetting}) => {
     //     getCityName(markerPosition.lat, markerPosition.lng, lang, dispatch);
     //     setIsSetting(false);
     // }
-
-    useEffect(() => {
+    
+    const handleCurrentPosition = () => {
         setLoading(true);
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     setCenterPosition({lat: position.coords.latitude, lng: position.coords.longitude});
+                    setMarkerPosition({lat: position.coords.latitude, lng: position.coords.longitude})
+
+                    setTimeout(()=>{
+                        dispatch(getLocationSuccess({
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude
+                        }));
+                        getCityName(position.coords.latitude, position.coords.longitude, lang, dispatch);
+                        setIsSetting(false);
+                    },2000)
                 },
                 (error) => {
                     setInfoStatus(error.message);
@@ -75,7 +86,33 @@ const GoogleMap = ({setIsSetting}) => {
             setInfoStatus('Geolocation is not supported by your browser');
         }
 
-    }, []);
+    }
+
+    // useEffect(() => {
+    //     setLoading(true);
+    //     if (navigator.geolocation) {
+    //         navigator.geolocation.getCurrentPosition(
+    //             (position) => {
+    //                 setCenterPosition({lat: position.coords.latitude, lng: position.coords.longitude});
+    //             },
+    //             (error) => {
+    //                 setInfoStatus(error.message);
+    //             }
+    //         );
+    //         setLoading(false)
+    //     } else {
+    //         setInfoStatus('Geolocation is not supported by your browser');
+    //     }
+    //
+    // }, []);
+
+    useEffect(() => {
+        if(latitude){
+            setCenterPosition({lat: latitude, lng: longitude});
+            setMarkerPosition({lat: latitude, lng: longitude});
+        }
+
+    }, [latitude, longitude]);
 
 
 
@@ -114,7 +151,7 @@ const GoogleMap = ({setIsSetting}) => {
                         </div>
                     </InfoWindow>
                 </Map>}
-                {/*{markerPosition.lat !== 0 && <button onClick={handleAddNewPlace}>{text.add_place}</button>}*/}
+                <button onClick={handleCurrentPosition}><img src={currentLocationIcon} alt="location" /></button>
             </div>
         </APIProvider>
     );

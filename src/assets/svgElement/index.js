@@ -7,5 +7,6 @@ import tabBarBack from "./tabBarBack.svg";
 import tabBarSubtract from "./tabBarSubtract.svg";
 import buttonPlus from "./buttonPlus.svg";
 import check from "./check.svg";
+import currentLocationIcon from "./currentLocationIcon.svg";
 
-export {ellipse1, rectangle, ellipse2, shape, ellipse3, tabBarBack, tabBarSubtract, buttonPlus, check}
+export {ellipse1, rectangle, ellipse2, shape, ellipse3, tabBarBack, tabBarSubtract, buttonPlus, check, currentLocationIcon}

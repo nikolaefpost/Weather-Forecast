@@ -22,6 +22,7 @@ export const data = {
         add_place: "add this place",
         return: "Return",
         loading: "Loading",
+        wait_little: "Wait a little, now I’ll tell you more",
     },
     ua: {
         hourly_forecast: "Погодинний прогноз",
@@ -46,5 +47,6 @@ export const data = {
         add_place: "добавить это место",
         return: "Вернуться",
         loading: "Загрузка",
+        wait_little: "Трохи зачекайте, зараз я вам усе розповім...",
     }
 }

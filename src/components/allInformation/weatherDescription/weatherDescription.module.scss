@@ -9,3 +9,8 @@
   background: linear-gradient(to right, #291c44, #341f5a);
   @include fonts(600, 15px, 20px, $label-dark-secondary);
 }
+
+.dots_container{
+  @include fonts(600, 15px, 20px, $label-dark-secondary);
+  text-align: center;
+}

@@ -13,6 +13,8 @@ const firstLetterCapitalized = (str) => {
   return str[0].toUpperCase() + str.slice(1);
 }
 
+const openaiUrl = "https://api.openai.com/v1/chat/completions";
+
 
 const cloudsData = {
   "01d": clear_sky_day,
@@ -56,4 +58,4 @@ const uvIndex = (uvi, lang) => {
   }
 };
 
-export {toCelsius, firstLetterCapitalized, cloudsData, weekData, monthData, uvIndex}
+export {toCelsius, firstLetterCapitalized, cloudsData, weekData, monthData, uvIndex, openaiUrl}

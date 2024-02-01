@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import {openaiUrl} from "../helpers/index.js";
 
 const promptToLocation = (prompt, lang) => {
 
@@ -7,7 +8,6 @@ const promptToLocation = (prompt, lang) => {
     const promptData = JSON.parse(localStorage.getItem(prompt));
     if (promptData?.locationString)  return promptData;
 
-    const url = "https://api.openai.com/v1/chat/completions";
 
     const data = {
         model: "gpt-3.5-turbo-0613",
@@ -73,7 +73,7 @@ const promptToLocation = (prompt, lang) => {
         method: "POST",
     };
 
-    return fetch(url, params)
+    return fetch(openaiUrl, params)
         .then((response) => response.json())
         .then((data) => {
             const promptRes = JSON.parse(

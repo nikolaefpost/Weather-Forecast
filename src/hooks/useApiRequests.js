@@ -4,7 +4,7 @@ import locationToCoordinates from "../api/locationToCoordinates.js";
 import PropTypes from "prop-types";
 import {useSelector, useDispatch} from "react-redux";
 import { getLocationStart, getLocationSuccess, setCity } from '../features/location/locationSlice.js';
-import { setWeatherData } from '../features/weather/weatherSlice.js'
+import { setWeatherData} from '../features/weather/weatherSlice.js'
 import {useLanguage} from "../context/index.js";
 
 
@@ -64,7 +64,7 @@ const useApiWeather = () => {
 
             try {
                 // Dispatch the asynchronous action
-                await dispatch(setWeatherData(latitude, longitude, lang));
+                await dispatch(setWeatherData(latitude, longitude, city, lang));
             } catch (error) {
                 setError(error);
                 console.error("Errorggg:", error);

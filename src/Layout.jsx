@@ -19,8 +19,8 @@ const Layout = () => {
     const screenHeight = window.screen.height;
 
     const {  city, loading, error} = useSelector((state) => state.location);
-    const { weatherData } = useSelector((state) => state.weather);
-
+    const { weatherData, descriptionData } = useSelector((state) => state.weather);
+    console.log(descriptionData)
 
     const onHandleMapSearch = () => {
         if (isSetting) setIsSetting(false);
@@ -84,6 +84,7 @@ const Layout = () => {
                 onHandleSettingToggle={onHandleSettingToggle}
                 settingsData={settingsData}
                 onHandleMapSearch={onHandleMapSearch}
+                descriptionData={descriptionData}
             />
         </div>
     );

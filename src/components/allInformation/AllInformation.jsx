@@ -25,7 +25,8 @@ const AllInformation = ({
                             onHandleSearchToggle,
                             onHandleSettingToggle,
                             settingsData,
-                            onHandleMapSearch
+                            onHandleMapSearch,
+                            descriptionData
                         }) => {
     const {text} = useLanguage();
     const {
@@ -94,7 +95,7 @@ const AllInformation = ({
 
                 </div>}
                 {/*{(height > 350) && <LocationComponent/>}*/}
-                <WeatherDescription/>
+                {(height > 350) && <WeatherDescription description={descriptionData}/>}
             </div>
 
         </div>
@@ -113,6 +114,7 @@ AllInformation.propTypes = {
     onHandleSettingToggle: PropTypes.func.isRequired,
     onHandleMapSearch: PropTypes.func.isRequired,
     settingsData: PropTypes.object.isRequired,
+    descriptionData: PropTypes.string
 
 };
 
