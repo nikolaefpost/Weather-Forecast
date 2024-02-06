@@ -7,13 +7,13 @@ import {
     InfoWindow
 } from "@vis.gl/react-google-maps";
 import {useDispatch, useSelector} from "react-redux";
-import {getLocationSuccess} from "../../features/location/locationSlice.js";
-import {getCityName} from "../../api/getCityName.js";
+import {getCityName, getLocationSuccess} from "../../features/location/locationSlice.js";
 import PropTypes from "prop-types";
 import {useLanguage} from "../../context/index.js";
+import {currentLocationIcon} from "../../assets/svgElement";
 
 import styles from "./map.module.scss";
-import {currentLocationIcon} from "../../assets/svgElement";
+
 
 
 const GoogleMap = ({setIsSetting}) => {
@@ -45,7 +45,7 @@ const GoogleMap = ({setIsSetting}) => {
                     latitude: event.detail.latLng.lat,
                     longitude: event.detail.latLng.lng
                 }));
-                getCityName(event.detail.latLng.lat, event.detail.latLng.lng, lang, dispatch);
+                dispatch(getCityName(event.detail.latLng.lat, event.detail.latLng.lng, lang));
                 setIsSetting(false);
             },2000)
         }
@@ -73,7 +73,7 @@ const GoogleMap = ({setIsSetting}) => {
                             latitude: position.coords.latitude,
                             longitude: position.coords.longitude
                         }));
-                        getCityName(position.coords.latitude, position.coords.longitude, lang, dispatch);
+                        dispatch(getCityName(position.coords.latitude, position.coords.longitude, lang));
                         setIsSetting(false);
                     },2000)
                 },

@@ -26,7 +26,6 @@ const weatherSlice = createSlice({
 export const { setWeatherDataSuccess, setDescriptionWeatherDataSuccess,  deleteDescriptionWeather} = weatherSlice.actions;
 
 export const setWeatherData = (latitude, longitude, prompt, lang) => async (dispatch) => {
-    console.log("START")
     dispatch(deleteDescriptionWeather());
     const weatherDataRes = await getWeatherData(latitude, longitude, lang);
     dispatch(setWeatherDataSuccess(weatherDataRes));
@@ -34,9 +33,5 @@ export const setWeatherData = (latitude, longitude, prompt, lang) => async (disp
     dispatch(setDescriptionWeatherDataSuccess(descriptionDataRes));
 };
 
-// export const setDescriptionWeatherData = (prompt, weatherData, lang) => async (dispatch) => {
-//     const descriptionDataRes = await getWeatherDescription(prompt, weatherData, lang);
-//     dispatch(setDescriptionWeatherDataSuccess(descriptionDataRes));
-// };
 
 export default weatherSlice.reducer;

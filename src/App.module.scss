@@ -45,4 +45,11 @@
     @include display-flex;
     height: 100vh;
   }
+
+  @media screen and  (min-width: 501px){
+    height: 750px;
+    width: 350px;
+   margin: 200px auto;
+  }
+
 }

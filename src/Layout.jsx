@@ -20,7 +20,7 @@ const Layout = () => {
 
     const {  city, loading, error} = useSelector((state) => state.location);
     const { weatherData, descriptionData } = useSelector((state) => state.weather);
-    console.log(descriptionData)
+
 
     const onHandleMapSearch = () => {
         if (isSetting) setIsSetting(false);

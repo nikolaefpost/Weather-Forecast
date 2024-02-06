@@ -1,11 +1,11 @@
 import  { useState, useEffect } from 'react';
 import { searchIcon } from "../../assets/image";
 import PropTypes from "prop-types";
-import fetchDataPrompt from "../../api/fetchDataPrompt.js";
 import { useDispatch } from "react-redux";
-
-import styles from './serchCity.module.scss'
 import { useLanguage } from "../../context/index.js";
+import {fetchDataPrompt} from "../../features/location/locationSlice.js";
+
+import styles from './serchCity.module.scss';
 
 const SearchCity = ({ setIsSearch }) => {
     const dispatch = useDispatch();
@@ -15,7 +15,6 @@ const SearchCity = ({ setIsSearch }) => {
     const [filteredCities, setFilteredCities] = useState([]);
     const [error, setError] = useState('')
 
-    // console.log(inputValue)
 
     useEffect(() => {
         // Fetch city data from GeoNames when the component mounts
@@ -62,7 +61,7 @@ const SearchCity = ({ setIsSearch }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetchDataPrompt(inputValue, lang, dispatch);
+        dispatch(fetchDataPrompt(inputValue, lang));
         setIsSearch(false);
     }
 
@@ -70,7 +69,7 @@ const SearchCity = ({ setIsSearch }) => {
 
         const stringCity = `${city.name}, ${city.country}`
         e.preventDefault();
-        fetchDataPrompt(stringCity, lang, dispatch);
+        dispatch(fetchDataPrompt(stringCity, lang));
         setIsSearch(false);
     }
 
